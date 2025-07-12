@@ -1,5 +1,6 @@
 import './singIn.scss';
 import { Buttom } from '../../components/Buttom';
+import { Link } from 'react-router';
 
 export const SingIn = () => {
 	return (
@@ -11,8 +12,10 @@ export const SingIn = () => {
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit velit impedit
 						nisi doloribus, laudantium nostrum!
 					</p>
-					<span>Don't you have an account.?</span>
-					<button>Sing in</button>
+					<Link to={'/sing-up'}>
+						<span>Don't you have an account.?</span>
+					</Link>
+					{/* <button>Sing in</button> */}
 				</div>
 				<div className='right'>
 					<h2>Sing In</h2>
