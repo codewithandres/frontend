@@ -15,7 +15,7 @@ export const SingIn = () => {
 					<Link to={'/sing-up'}>
 						<span>Don't you have an account.?</span>
 					</Link>
-					{/* <button>Sing in</button> */}
+		
 				</div>
 				<div className='right'>
 					<h2>Sing In</h2>

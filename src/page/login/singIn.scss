@@ -87,8 +87,8 @@ $bg-primary-alpha: oklch(99.4% 0.0015 266.8);
 					transition: 300ms ease;
 					outline: none;
 
-					box-shadow: oklch(0% 0 0 / 0.02) 0px 1px 10px 0px,
-						oklch(41.93% 0.01902 248.342 / 0.15) 0px 0px 0px 1.5px;
+					box-shadow: oklch(0% 0 0 / 0.05) 0px 6px 24px 0px,
+						oklch(0% 0 0 / 0.08) 0px 0px 0px 1px;
 
 					&::placeholder {
 						font-size: 0.9rem;
