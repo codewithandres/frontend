@@ -1,4 +1,5 @@
 import './singIn.scss';
+import { Buttom } from '../../components/Buttom';
 
 export const SingIn = () => {
 	return (
@@ -13,7 +14,14 @@ export const SingIn = () => {
 					<span>Don't you have an account.?</span>
 					<button>Sing in</button>
 				</div>
-				<div className='right'></div>
+				<div className='right'>
+					<h2>Sing In</h2>
+					<form>
+						<input type='text' placeholder='Username' />
+						<input type='password' placeholder='Password' />
+						<Buttom>Sing in</Buttom>
+					</form>
+				</div>
 			</div>
 		</div>
 	);
