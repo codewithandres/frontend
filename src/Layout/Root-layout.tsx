@@ -15,7 +15,9 @@ export const RootLayout = () => {
 				<div className='layout-wrapper-contet'>
 					<Leftbar />
 
-					<Outlet />
+					<div style={{ flex: 6 }}>
+						<Outlet />
+					</div>
 
 					<Rightbar />
 				</div>

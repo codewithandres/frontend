@@ -1,0 +1,9 @@
+.righ-sidebar {
+	flex: 3;
+	position: sticky;
+	top: 10vh;
+	height: calc(100vh - 10vh);
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: hsl(210, 17%, 93%) hsl(0, 0%, 100%);
+}
