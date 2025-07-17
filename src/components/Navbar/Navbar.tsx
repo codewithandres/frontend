@@ -4,8 +4,12 @@ import './Navbar.scss';
 import photo_user from '../../assets/photo-user.webp';
 
 import { Bell, House, LayoutGrid, Mail, Search, SunMoon, UserRound } from 'lucide-react';
+import { use } from 'react';
+import { DarkModeContex } from '../../context/dark-mode.context';
 
 export const Navbar = () => {
+	const { toggle } = use(DarkModeContex);
+
 	return (
 		<nav className='navbar'>
 			<div className='left'>
@@ -14,7 +18,7 @@ export const Navbar = () => {
 				</Link>
 
 				<House size={20} />
-				<SunMoon size={20} />
+				<SunMoon size={20} onClick={toggle} />
 				<LayoutGrid size={20} />
 
 				<div className='search'>

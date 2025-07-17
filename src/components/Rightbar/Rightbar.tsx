@@ -17,7 +17,9 @@ export const Rightbar = () => {
 								height={40}
 								loading='lazy'
 							/>
-							<figcaption>Jane Doe</figcaption>
+							<p>
+								<figcaption>Jane Doe</figcaption>
+							</p>
 						</figure>
 						<div className='buttons'>
 							<button>Follow</button>

@@ -1,86 +1,91 @@
+@import '../../sass/mixin/dark-mode.scss';
+
 .righ-sidebar {
-	flex: 3;
-	position: sticky;
-	top: 10vh;
-	height: calc(100vh - 10vh);
-	overflow-y: auto;
-	scrollbar-width: thin;
-	scrollbar-color: hsl(210, 17%, 93%) hsl(0, 0%, 100%);
+	@include themify($themes) {
+		flex: 3;
+		position: sticky;
+		top: 10vh;
+		height: calc(100vh - 10vh);
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: hsl(210, 17%, 93%) hsl(0, 0%, 100%);
+		background-color: themed('bg');
+		.container {
+			padding: 20px;
 
-	.container {
-		padding: 20px;
+			.item {
+				background-color: themed('bgSoft');
+				margin-bottom: 1rem;
+				padding: 1rem;
+				border-radius: 0.4rem;
+				box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+					rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 
-		.item {
-			margin-bottom: 1rem;
-			padding: 1rem;
-			border-radius: 0.4rem;
-			box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-				rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-
-			span {
-				color: grey;
-			}
-
-			.user {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				gap: 0.6rem;
-				.user-info {
-					display: flex;
-					align-items: center;
-					gap: 0.8rem;
-					margin-block: 1rem;
-					position: relative;
-
-					img {
-						width: 40px;
-						height: 40px;
-						border-radius: 50%;
-						object-fit: cover;
-						object-position: center;
-					}
-
-					.online {
-						width: 12px;
-						height: 12px;
-						border-radius: 50%;
-						background-color: limegreen;
-						position: absolute;
-						inset: 0 0 0 30px;
-					}
-
-					p {
-						color: gray;
-						font-size: 0.8rem;
-						figcaption {
-							font-weight: 500;
-							color: black;
-						}
-					}
-				}
 				span {
-					text-wrap: nowrap;
-					font-size: 0.8rem;
+					color: themed('textColorSoft');
 				}
 
-				.buttons {
+				.user {
 					display: flex;
 					align-items: center;
-					gap: 1rem;
+					justify-content: space-between;
+					gap: 0.6rem;
+					.user-info {
+						display: flex;
+						align-items: center;
+						gap: 0.8rem;
+						margin-block: 1rem;
+						position: relative;
 
-					button {
-						border: none;
-						padding: 0.6rem;
-						color: whitesmoke;
-						cursor: pointer;
-						border-radius: 0.4rem;
-
-						&:first-child {
-							background-color: blue;
+						img {
+							width: 40px;
+							height: 40px;
+							border-radius: 50%;
+							object-fit: cover;
+							object-position: center;
 						}
-						&:last-child {
-							background-color: red;
+
+						.online {
+							width: 12px;
+							height: 12px;
+							border-radius: 50%;
+							background-color: limegreen;
+							position: absolute;
+							inset: 0 0 0 30px;
+						}
+
+						p {
+							color: themed('textColorSoft');
+							font-size: 0.8rem;
+							figcaption {
+								font-weight: 500;
+								color: themed('textColor');
+							}
+						}
+					}
+					span {
+						text-wrap: nowrap;
+						font-size: 0.8rem;
+					}
+
+					.buttons {
+						display: flex;
+						align-items: center;
+						gap: 1rem;
+
+						button {
+							border: none;
+							padding: 0.6rem;
+							color: whitesmoke;
+							cursor: pointer;
+							border-radius: 0.4rem;
+
+							&:first-child {
+								background-color: blue;
+							}
+							&:last-child {
+								background-color: red;
+							}
 						}
 					}
 				}

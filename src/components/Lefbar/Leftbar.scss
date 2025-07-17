@@ -1,70 +1,76 @@
+@import '../../sass/mixin/dark-mode.scss';
+
 .leftbar {
-	flex: 2;
-	position: sticky;
-	top: 10vh;
-	height: calc(100vh - 10vh);
-	overflow-y: auto;
-	scrollbar-width: thin;
-	scrollbar-color: hsl(210, 17%, 93%) hsl(0, 0%, 100%);
-	// background-color: rebeccapurple;
+	@include themify($themes) {
+		flex: 2;
+		position: sticky;
+		top: 10vh;
+		height: calc(100vh - 10vh);
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: hsl(210, 17%, 93%) hsl(0, 0%, 100%);
+		background-color: themed('bg');
+		color: themed('textColor');
 
-	.container {
-		padding: 20px;
+		.container {
+			padding: 20px;
 
-		hr {
-			margin-block: 0.6rem;
-			border: none;
-			height: 0.5px;
-			background-color: lightgray;
-		}
-
-		.menu {
-			display: flex;
-			flex-direction: column;
-			gap: 0.5rem;
-
-			.user {
-				display: flex;
-				align-items: center;
-				gap: 0.5rem;
-
-				img {
-					width: 50px;
-					height: 50px;
-					border-radius: 50%;
-					object-fit: cover;
-					object-position: center;
-					border: 2px solid lightblue;
-					padding: 0.11rem;
-				}
-
-				span {
-					font-weight: 500;
-				}
+			hr {
+				margin-block: 0.6rem;
+				border: none;
+				height: 0.5px;
+				background-color: themed('border');
 			}
 
-			.item {
+			.menu {
 				display: flex;
-				align-items: center;
-				gap: 0.7rem;
-				cursor: pointer;
-				border-radius: 0.4rem;
-				padding-block: 0.5rem;
-				padding-inline: 0.2rem;
-				transition: 200ms ease-in;
+				flex-direction: column;
+				gap: 0.5rem;
 
-				&:hover {
-					background-color: oklab(91.252% -0.00046 -0.01013 / 0.377);
+				.user {
+					display: flex;
+					align-items: center;
+					gap: 0.5rem;
+
+					img {
+						width: 50px;
+						height: 50px;
+						border-radius: 50%;
+						object-fit: cover;
+						object-position: center;
+						border: 2px solid lightblue;
+						padding: 0.11rem;
+					}
+
+					span {
+						font-weight: 500;
+					}
 				}
 
-				svg {
-					width: 25px;
-					height: 25px;
-					stroke-width: 1;
-				}
+				.item {
+					margin-left: 0.5rem;
+					display: flex;
+					align-items: center;
+					gap: 0.7rem;
+					cursor: pointer;
+					border-radius: 0.4rem;
+					padding-block: 0.5rem;
+					padding-inline: 0.2rem;
+					transition: 200ms ease-in;
 
-				p {
-					font-size: 0.8rem;
+					&:hover {
+						background-color: oklab(91.252% -0.00046 -0.01013 / 0.377);
+					}
+
+					svg {
+						width: 20px;
+						height: 20px;
+						stroke-width: 2;
+					}
+
+					p {
+						font-size: 0.8rem;
+					}
 				}
 			}
 		}

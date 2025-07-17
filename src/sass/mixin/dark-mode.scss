@@ -1,0 +1,41 @@
+$themes: (
+	light: (
+		textColor: oklch(19.659% 0.02436 251.701),
+		bg: oklch(99.4% 0.0015 266.8),
+		logo: oklch(28.784% 0.19949 264.073),
+		bgSoft: oklch(93.894% 0.00934 232.784),
+		textColorSoft: oklch(52.932% 0.00491 236.972),
+		border: oklch(86.686% 0.0001 271.152),
+	),
+	dark: (
+		textColor: oklch(94.479% 0.00926 258.491),
+		bg: oklch(15.663% 0.03202 276.228),
+		logo: oklch(94.238% 0.01081 286.051),
+		bgSoft: oklch(20.921% 0.04123 268.144),
+		textColorSoft: oklch(72.829% 0.00761 268.561 / 0.705),
+		border: oklch(78.393% 0.01147 256.825 / 0.527),
+	),
+);
+
+@mixin themify($themes) {
+	@each $theme, $map in $themes {
+		.theme-#{$theme} & {
+			$theme-map: () !global;
+			@each $key, $submap in $map {
+				$value: map-get(map-get($themes, $theme), '#{$key}');
+				$theme-map: map-merge(
+					$theme-map,
+					(
+						$key: $value,
+					)
+				) !global;
+			}
+			@content;
+			$theme-map: null !global;
+		}
+	}
+}
+
+@function themed($key) {
+	@return map-get($theme-map, $key);
+}

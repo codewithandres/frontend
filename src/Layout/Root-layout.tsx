@@ -6,10 +6,16 @@ import { Navbar } from '../components/Navbar/Navbar';
 import { Rightbar } from '../components/Rightbar/Rightbar';
 import { Leftbar } from '../components/Lefbar/Leftbar';
 import { ProtectedRoute } from '../components/ProtectedRoute';
+import { use } from 'react';
+import { DarkModeContex } from '../context/dark-mode.context';
 
 export const RootLayout = () => {
+	const { darkMode } = use(DarkModeContex);
+
+	console.log(darkMode);
+
 	return (
-		<div className='layout-wrapper'>
+		<div className={`layout-wrapper  theme-${darkMode ? 'dark' : 'light'} `}>
 			<ProtectedRoute>
 				<Navbar />
 				<div className='layout-wrapper-contet'>

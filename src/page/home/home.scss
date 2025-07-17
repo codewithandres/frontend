@@ -1,0 +1,9 @@
+@import '../../sass/mixin/dark-mode.scss';
+
+.home {
+	@include themify($themes) {
+		min-height: 100vh;
+		padding: 20px 70px;
+		background-color: themed('bgSoft');
+	}
+}
