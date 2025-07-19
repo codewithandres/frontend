@@ -1,21 +1,12 @@
-import { useEffect, useState } from 'react';
 import { DarkModeContex } from './contexts';
+import { usePrersistedState } from '../hooks/use-prersistedState';
 
 export const DarkModeProvaider = ({ children }: PropsChildren) => {
-	const isMode = localStorage.getItem('darkMode') || false;
-
-	const [darkMode, setDarkMode] = useState<boolean>(!!isMode);
+	const [darkMode, setDarkMode] = usePrersistedState('darkMode', false);
 
 	const toggle = (): void => setDarkMode(prev => !prev);
 
-	useEffect(() => {
-		localStorage.setItem('darkMode', String(darkMode));
-	}, [darkMode]);
-
-	const values = {
-		darkMode,
-		toggle,
-	} as const;
+	const values = { darkMode, toggle } as const;
 
 	return <DarkModeContex value={values}> {children} </DarkModeContex>;
 };
