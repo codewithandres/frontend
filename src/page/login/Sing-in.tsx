@@ -15,13 +15,13 @@ export const SingIn = () => {
 					<Link to={'/sing-up'}>
 						<span>Don't you have an account.?</span>
 					</Link>
-		
 				</div>
 				<div className='right'>
 					<h2>Sing In</h2>
 					<form>
 						<input type='text' placeholder='Username' />
 						<input type='password' placeholder='Password' />
+
 						<Buttom>Sing in</Buttom>
 					</form>
 				</div>

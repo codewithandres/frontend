@@ -1,11 +1,12 @@
+import { use } from 'react';
+import './Navbar.scss';
+
 import { Link } from 'react-router';
 
-import './Navbar.scss';
-import photo_user from '../../assets/photo-user.webp';
+import { DarkModeContex } from '../../context/contexts';
 
 import { Bell, House, LayoutGrid, Mail, Search, SunMoon, UserRound } from 'lucide-react';
-import { use } from 'react';
-import { DarkModeContex } from '../../context/dark-mode.context';
+import photo_user from '../../assets/photo-user.webp';
 
 export const Navbar = () => {
 	const { toggle } = use(DarkModeContex);

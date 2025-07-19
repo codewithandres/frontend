@@ -1,9 +1,8 @@
-import { createContext, useEffect, useState } from 'react';
-
-export const DarkModeContex = createContext({} as DarkModeContextType);
+import { useEffect, useState } from 'react';
+import { DarkModeContex } from './contexts';
 
 export const DarkModeProvaider = ({ children }: PropsChildren) => {
-	const isMode = localStorage.getItem('darkMode')  || false;
+	const isMode = localStorage.getItem('darkMode') || false;
 
 	const [darkMode, setDarkMode] = useState<boolean>(!!isMode);
 

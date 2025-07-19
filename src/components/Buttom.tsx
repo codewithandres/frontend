@@ -1,11 +1,16 @@
-import type { PropsWithChildren } from 'react';
+import type {  ReactNode } from 'react';
 
 import './Buttom.scss' with { type: 'css'};
 
-export const Buttom = ( {children }: PropsWithChildren ) => {
+interface PropsButton { 
+	children: ReactNode; 
+	// onLogin: () => void;
+}
+
+export const Buttom = ( {children, /* onLogin */  }: PropsButton ) => {
 	return (
 		<>
-			<button className='button'>
+			<button className='button' >
 				<span className='shadow'></span>
 				<span className='edge'></span>
 				<div className='front'>
