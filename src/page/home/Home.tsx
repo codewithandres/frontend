@@ -1,13 +1,13 @@
 import './home.scss';
 
 import { Stories } from '../../components/stories/stories';
-import { Post } from '../../components/posts/Post';
+import { Posts } from '../../components/posts/Posts';
 
 export const Home = () => {
 	return (
 		<div className='home'>
 			<Stories />
-			<Post />
+			<Posts />
 		</div>
 	);
 };
