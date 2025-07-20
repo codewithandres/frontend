@@ -26,7 +26,6 @@ export const Posts = () => {
 			img: 'https://www.peru.travel/Contenido/General/Imagen/es/92/1.1/nor-yauyos-cochas.jpg',
 		},
 	];
-
 	return (
 		<div className='posts'>
 			{posts.map(post => (

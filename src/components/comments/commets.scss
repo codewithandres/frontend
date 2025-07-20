@@ -1,0 +1,70 @@
+@import '../../sass/mixin/dark-mode.scss';
+
+.comments {
+	@include themify($themes) {
+		img {
+			width: 40px;
+			height: 40px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+		.comments__write {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1.5rem;
+			margin: 1.5rem 0;
+
+			input {
+				flex: 4;
+				padding: 0.5rem;
+				width: 100%;
+				border: 1px solid themed('border');
+				outline: 0;
+				background-color: transparent;
+				color: themed('textColorSoft');
+				border-radius: 0.5rem;
+				transition: box-shadow 300ms ease-in;
+
+				&:focus {
+					box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+				}
+			}
+
+			.comment-butto {
+				flex: 1;
+			}
+		}
+
+		.comment {
+			margin: 30px 0;
+			display: flex;
+			justify-content: space-between;
+			gap: 1.4rem;
+
+			.comment__body {
+				display: flex;
+				flex: 5;
+				flex-direction: column;
+				gap: 0.3rem;
+				font-size: 0.9rem;
+
+				.comment__body__name {
+					font-weight: 500;
+				}
+				.comment__body__description {
+					color: themed('textColorSoft');
+					text-wrap: pretty;
+				}
+			}
+
+			.date {
+				flex: 1;
+				font-size: smaller;
+				text-wrap: pretty;
+				align-self: flex-end;
+				color: themed('textColorSoft');
+			}
+		}
+	}
+}

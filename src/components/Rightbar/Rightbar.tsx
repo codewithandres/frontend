@@ -1,4 +1,3 @@
-import { use } from 'react';
 import photo_user from '../../assets/photo-user.webp';
 import './Rightbar.scss';
 
