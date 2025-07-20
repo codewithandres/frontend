@@ -1,10 +1,11 @@
+import { use } from 'react';
 import { Navigate } from 'react-router';
+import { AuthContex } from '../context/Auth.contex';
 
 export const ProtectedRoute = ({ children }: PropsChildren) => {
-	// const { user } = use(AuthContext);
-	const user = true;
+	const { currentUser } = use(AuthContex);
 
-	if (!user) {
+	if (!currentUser) {
 		return <Navigate to={'/sing-in'} />;
 	}
 

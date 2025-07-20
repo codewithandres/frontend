@@ -1,5 +1,9 @@
+import { use } from 'react';
+
 import './Leftbar.scss';
-import photo_user from '../../assets/photo-user.webp';
+
+import { AuthContex } from '../../context/Auth.contex';
+
 import {
 	ContactRound,
 	Group,
@@ -14,13 +18,21 @@ import {
 } from 'lucide-react';
 
 export const Leftbar = () => {
+	const { currentUser } = use(AuthContex);
+
 	return (
 		<div className='leftbar'>
 			<div className='container'>
 				<div className='menu'>
 					<div className='user'>
-						<img src={photo_user} width={30} height={30} loading='lazy' />
-						<span>codewitdandres</span>
+						<img
+							src={currentUser?.profilePicture}
+							width={30}
+							height={30}
+							loading='lazy'
+						/>
+
+						<span>{currentUser?.username} </span>
 					</div>
 
 					<div className='item'>

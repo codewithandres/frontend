@@ -1,3 +1,4 @@
+import { use } from 'react';
 import photo_user from '../../assets/photo-user.webp';
 import './Rightbar.scss';
 
@@ -17,9 +18,9 @@ export const Rightbar = () => {
 								height={40}
 								loading='lazy'
 							/>
-							<p>
+							<div>
 								<figcaption>Jane Doe</figcaption>
-							</p>
+							</div>
 						</figure>
 						<div className='buttons'>
 							<button>Follow</button>
@@ -40,10 +41,10 @@ export const Rightbar = () => {
 								height={40}
 								loading='lazy'
 							/>
-							<p>
+							<div>
 								<figcaption>Jane Doe</figcaption>
 								changed their cover picture
-							</p>
+							</div>
 						</figure>
 						<span>1 min ago</span>
 					</div>

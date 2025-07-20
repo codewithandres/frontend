@@ -1,8 +1,22 @@
+import { use, type FormEvent } from 'react';
+import { Link, useNavigate } from 'react-router';
+
 import './singIn.scss';
+
+import { AuthContex } from '../../context/Auth.contex';
 import { Buttom } from '../../components/Buttom';
-import { Link } from 'react-router';
 
 export const SingIn = () => {
+	const navigate = useNavigate();
+
+	const { Login } = use(AuthContex);
+
+	const handleLogin = (event: FormEvent) => {
+		event.preventDefault();
+		Login();
+		navigate('/')
+	};
+
 	return (
 		<div className='sing-in'>
 			<div className='card'>
@@ -22,7 +36,7 @@ export const SingIn = () => {
 						<input type='text' placeholder='Username' />
 						<input type='password' placeholder='Password' />
 
-						<Buttom>Sing in</Buttom>
+						<Buttom onLogin={handleLogin}>Sing in</Buttom>
 					</form>
 				</div>
 			</div>

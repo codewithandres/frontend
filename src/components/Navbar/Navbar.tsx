@@ -6,10 +6,13 @@ import { Link } from 'react-router';
 import { DarkModeContex } from '../../context/contexts';
 
 import { Bell, House, LayoutGrid, Mail, Search, SunMoon, UserRound } from 'lucide-react';
-import photo_user from '../../assets/photo-user.webp';
+import { AuthContex } from '../../context/Auth.contex';
 
 export const Navbar = () => {
 	const { toggle } = use(DarkModeContex);
+	const { currentUser } = use(AuthContex);
+
+	console.log(currentUser);
 
 	return (
 		<nav className='navbar'>
@@ -30,8 +33,12 @@ export const Navbar = () => {
 
 			<div className='right'>
 				<div className='user'>
-					<img src={photo_user} alt='Imagen del usuario' loading='lazy' />
-					<span>codewitdandres</span>
+					<img
+						src={currentUser?.profilePicture}
+						alt='Imagen del usuario'
+						loading='lazy'
+					/>
+					<span>{currentUser?.username}</span>
 				</div>
 
 				<UserRound size={20} />

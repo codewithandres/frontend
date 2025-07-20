@@ -1,16 +1,16 @@
-import type {  ReactNode } from 'react';
+import type {  FormEvent, ReactNode } from 'react';
 
 import './Buttom.scss' with { type: 'css'};
 
 interface PropsButton { 
 	children: ReactNode; 
-	// onLogin: () => void;
+	onLogin: (event: FormEvent) => void;
 }
 
-export const Buttom = ( {children, /* onLogin */  }: PropsButton ) => {
+export const Buttom = ( {children,  onLogin   }: PropsButton ) => {
 	return (
 		<>
-			<button className='button' >
+			<button className='button' onClick={onLogin}>
 				<span className='shadow'></span>
 				<span className='edge'></span>
 				<div className='front'>
