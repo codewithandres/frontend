@@ -1,4 +1,5 @@
 @import '../../sass/mixin/dark-mode.scss';
+@import '../../sass/mixin/resposive-mode.scss';
 
 .leftbar {
 	@include themify($themes) {
@@ -7,10 +8,14 @@
 		top: 10vh;
 		height: calc(100vh - 10vh);
 		overflow-y: auto;
-		scrollbar-width: thin;
+		scrollbar-width: none;
 		scrollbar-color: hsl(210, 17%, 93%) hsl(0, 0%, 100%);
 		background-color: themed('bg');
 		color: themed('textColor');
+
+		@include mobile {
+			display: none;
+		}
 
 		.container {
 			padding: 20px;

@@ -1,5 +1,5 @@
 /* From Uiverse.io by adamgiebl */
-button {
+.comment-button {
 	font-family: inherit;
 	font-size: 0.9rem;
 	background: royalblue;
@@ -15,33 +15,33 @@ button {
 	cursor: pointer;
 }
 
-button span {
+.comment-button span {
 	display: block;
 	margin-left: 0.3rem;
 	font-size: small;
 	transition: all 0.3s ease-in-out;
 }
 
-button svg {
+.comment-button svg {
 	display: block;
 	transform-origin: center center;
 	transition: transform 0.3s ease-in-out;
 }
 
-button:hover .svg-wrapper {
+.comment-button:hover .svg-wrapper {
 	animation: fly-1 0.6s ease-in-out infinite alternate;
 }
 
-button:hover svg {
+.comment-button:hover svg {
 	transform: translateX(2rem) rotate(45deg) scale(1.1);
 }
 
-button:hover span {
+.comment-button:hover span {
 	opacity: 0;
 	transform: translateX(5rem);
 }
 
-button:active {
+.comment-button:active {
 	transform: scale(0.95);
 }
 

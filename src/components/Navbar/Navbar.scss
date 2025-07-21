@@ -1,4 +1,5 @@
 @import '../../sass/mixin/dark-mode.scss';
+@import '../../sass//mixin/resposive-mode.scss';
 
 .navbar {
 	@include themify($themes) {
@@ -48,6 +49,11 @@
 				align-items: center;
 				overflow: clip;
 				width: 350px;
+
+				@include tablet {
+					width: 200px;
+				}
+
 				input {
 					background-color: transparent;
 					outline: none;
@@ -58,6 +64,10 @@
 					padding: 0.7rem;
 					font-size: 0.9rem;
 					color: themed('textColorSoft');
+
+					@include mobile {
+						display: none;
+					}
 				}
 			}
 		}
@@ -66,6 +76,11 @@
 			display: flex;
 			align-items: center;
 			gap: 1rem;
+
+			@include mobile {
+				display: none;
+			}
+
 			.user {
 				display: flex;
 				align-items: center;
@@ -74,6 +89,11 @@
 				border: 1px solid themed('border');
 				padding: 0.4rem 1rem;
 				border-radius: 1.4rem;
+
+				@include tablet {
+					display: none;
+				}
+
 				img {
 					object-position: center;
 					object-fit: cover;

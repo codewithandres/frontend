@@ -4,7 +4,7 @@ import './Buttom.scss' with { type: 'css'};
 
 interface PropsButton { 
 	children: ReactNode; 
-	onLogin: (event: FormEvent) => void;
+	onLogin?: (event: FormEvent) => void;
 }
 
 export const Buttom = ( {children,  onLogin   }: PropsButton ) => {

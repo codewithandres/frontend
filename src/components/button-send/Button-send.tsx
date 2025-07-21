@@ -9,14 +9,13 @@ import './button-send.scss';
 import type React from 'react';
 
 interface ButtonProps {
-	className: string;
 	children: ReactNode;
 }
 
-const ButtonSend = ({ children, className }: ButtonProps) => {
+const ButtonSend = ({ children }: ButtonProps) => {
 	return (
 		<>
-			<button className={className}>
+			<button className='comment-button'>
 				<div className='svg-wrapper-1'>
 					<div className='svg-wrapper'>
 						<svg
