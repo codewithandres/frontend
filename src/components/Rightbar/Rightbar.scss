@@ -64,7 +64,10 @@
 							inset: 0 0 0 30px;
 						}
 
-						div {
+						p {
+							color: themed('textColorSoft');
+							font-size: small;
+
 							figcaption {
 								color: themed('textColorSoft');
 								font-size: 0.8rem;

@@ -17,9 +17,9 @@ export const Rightbar = () => {
 								height={40}
 								loading='lazy'
 							/>
-							<div>
+							<p>
 								<figcaption>Jane Doe</figcaption>
-							</div>
+							</p>
 						</figure>
 						<div className='buttons'>
 							<button>Follow</button>
@@ -40,10 +40,11 @@ export const Rightbar = () => {
 								height={40}
 								loading='lazy'
 							/>
-							<div>
+
+							<p>
 								<figcaption>Jane Doe</figcaption>
 								changed their cover picture
-							</div>
+							</p>
 						</figure>
 						<span>1 min ago</span>
 					</div>
