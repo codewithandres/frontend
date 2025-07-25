@@ -1,0 +1,189 @@
+@import '../../sass/mixin/dark-mode.scss';
+@import '../../sass/mixin/resposive-mode.scss';
+
+.suggestion__friend {
+	@include themify($themes) {
+		width: 100%;
+		background-color: themed('bgSoft');
+		margin-block-end: 1rem;
+		border-radius: 1rem;
+		padding: 1rem;
+		box-shadow: hsla(0, 0%, 0%, 0.16) 0px 10px 36px 0px,
+			hsla(0, 0%, 0%, 0.06) 0px 0px 0px 1px;
+
+		.wrapper__find {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+
+			.find__title {
+				font-weight: 500;
+				font-size: 1.4rem;
+				color: themed('textColor');
+				margin-bottom: 0.5rem;
+			}
+
+			.friend__wrapper {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 100%;
+
+				.friends-list {
+					position: relative;
+					width: 100%;
+
+					.friend__wrapper__item {
+						position: absolute;
+						top: -20px;
+						width: 50px;
+						height: 50px;
+						background-color: white;
+						border-radius: 50%;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						overflow: clip;
+						border: 2px solid hsla(101, 100%, 50%, 0.486);
+
+						img {
+							width: 100%;
+							height: 100%;
+							object-fit: cover;
+							object-position: center;
+						}
+
+						&:nth-child(2) {
+							left: 30px;
+						}
+						&:nth-child(3) {
+							left: 55px;
+						}
+						&:nth-child(4) {
+							left: 80px;
+						}
+					}
+				}
+
+				.add-friends {
+					display: flex;
+					align-items: center;
+					gap: 0.5rem;
+					width: max-content;
+					padding-inline: 1.2rem;
+					padding-block: 0.7rem;
+					font-family: inherit;
+					background-color: themed('bg');
+					border: none;
+					border-radius: 2rem;
+					cursor: pointer;
+					transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+					&:hover {
+						outline: 2px solid themed('border');
+						background-color: themed('bgSoft');
+
+						& .icon-add {
+							background-color: themed('bg');
+						}
+					}
+
+					&:active {
+						scale: 0.9;
+					}
+
+					span {
+						color: themed('textColor');
+						text-wrap: nowrap;
+						font-weight: 400;
+					}
+
+					.icon-add {
+						background-color: themed('bgSoft');
+						color: themed('textColorSoft');
+						border-radius: 50%;
+						padding: 0.4rem;
+					}
+				}
+			}
+
+			.other__wrapper {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+				user-select: none;
+				margin-block-start: 1rem;
+
+				.other__title {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					color: themed('textColor');
+					margin-bottom: 0.5rem;
+
+					h2 {
+						font-weight: 500;
+						font-size: 1.4rem;
+					}
+
+					p {
+						font-size: small;
+						font-weight: 400;
+					}
+				}
+
+				.other__frind {
+					display: flex;
+					flex-direction: column;
+					gap: 1.5rem;
+
+					.other__friend__item {
+						width: 100%;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+
+						.other__friend__info {
+							display: flex;
+							align-items: center;
+							gap: 1rem;
+
+							img {
+								border-radius: 50%;
+								object-fit: cover;
+								object-position: center;
+								width: 50px;
+								height: 50px;
+							}
+
+							h4 {
+								color: themed('textColor');
+								font-weight: 500;
+								font-size: 1rem;
+							}
+
+							span {
+								color: themed('textColorSoft');
+								font-weight: 300;
+								font-size: 0.9rem;
+							}
+						}
+
+						.other__friend__add {
+							width: 30px;
+							height: 30px;
+							border: none;
+							border-radius: 50%;
+							cursor: pointer;
+							display: grid;
+							place-items: center;
+							background-color: themed('bg');
+							color: themed('textColorSoft');
+						}
+					}
+				}
+			}
+		}
+	}
+}

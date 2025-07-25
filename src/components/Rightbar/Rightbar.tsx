@@ -1,32 +1,16 @@
-import photo_user from '../../assets/photo-user.webp';
 import './Rightbar.scss';
+
+import { SuggestionFriend } from '../Suggestion-friend/Suggestion-friend';
+
+import photo_user from '../../assets/photo-user.webp';
 
 export const Rightbar = () => {
 	return (
 		<div className='righ-sidebar'>
 			<div className='container'>
+
 				{/* user suggestion */}
-				<div className='item'>
-					<span>suggestions for you</span>
-					<div className='user'>
-						<figure className='user-info'>
-							<img
-								src={photo_user}
-								alt='Photo Profile'
-								width={40}
-								height={40}
-								loading='lazy'
-							/>
-							<p>
-								<figcaption>Jane Doe</figcaption>
-							</p>
-						</figure>
-						<div className='buttons'>
-							<button>Follow</button>
-							<button>dissmis</button>
-						</div>
-					</div>
-				</div>
+				<SuggestionFriend />
 
 				{/* user activities  */}
 				<div className='item'>
