@@ -1,7 +1,7 @@
 import './seggestion-friend.scss';
 
 import { Plus } from 'lucide-react';
-import photo_user from '../../assets/phot_user.jpg';
+import photo_user from '../../../assets/phot_user.jpg';
 
 export const SuggestionFriend = () => {
 	return (

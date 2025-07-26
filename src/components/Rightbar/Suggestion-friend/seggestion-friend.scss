@@ -1,5 +1,5 @@
-@import '../../sass/mixin/dark-mode.scss';
-@import '../../sass/mixin/resposive-mode.scss';
+@import '../../../sass/mixin/dark-mode.scss';
+@import '../../../sass/mixin/resposive-mode.scss';
 
 .suggestion__friend {
 	@include themify($themes) {
