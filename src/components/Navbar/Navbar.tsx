@@ -5,7 +5,18 @@ import { Link } from 'react-router';
 
 import { DarkModeContex } from '../../context/contexts';
 
-import { Bell, House, LayoutGrid, Mail, Search, SunMoon, UserRound } from 'lucide-react';
+import {
+	Bell,
+	ChevronDown,
+	House,
+	LayoutGrid,
+	LogOut,
+	Mail,
+	Search,
+	SunMoon,
+	User,
+	UserRound,
+} from 'lucide-react';
 import { AuthContex } from '../../context/Auth.contex';
 
 export const Navbar = () => {
@@ -21,9 +32,9 @@ export const Navbar = () => {
 					<span> codewithsocial </span>
 				</Link>
 
-				<House size={20} />
+				{/* <House size={20} />
+				<LayoutGrid size={20} /> */}
 				<SunMoon size={20} onClick={toggle} />
-				<LayoutGrid size={20} />
 
 				<div className='search'>
 					<Search size={20} />
@@ -39,11 +50,26 @@ export const Navbar = () => {
 						loading='lazy'
 					/>
 					<span>{currentUser?.username}</span>
+					<ChevronDown />
 				</div>
 
-				<UserRound size={20} />
+				<div className='user-dropdaw'>
+					<ul className='user-dropdaw__menu'>
+						<li className='user-dropdaw__item'>
+							<User /> <span> Profile </span>
+						</li>
+						<li className='user-dropdaw__item'>
+							<Bell /> <span> Notifications </span>
+						</li>
+						<li className='user-dropdaw__item'>
+							<LogOut /> <span> log out </span>
+						</li>
+					</ul>
+				</div>
+
+				{/* <UserRound size={20} />
 				<Mail size={20} />
-				<Bell size={20} />
+				<Bell size={20} /> */}
 			</div>
 		</nav>
 	);
