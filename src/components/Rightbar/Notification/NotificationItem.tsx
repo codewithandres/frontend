@@ -79,7 +79,7 @@ export const NotificationItem = ({
 							// height={50}
 						/>
 						<p className='item-info__text'>
-							<span className='item-info__text--bold'>@{username}</span> follow yuo
+							<span className='item-info__text--bold'>@{username}</span> commented on your post 
 						</p>
 					</figure>
 

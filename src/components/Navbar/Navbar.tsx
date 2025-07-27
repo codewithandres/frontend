@@ -5,18 +5,7 @@ import { Link } from 'react-router';
 
 import { DarkModeContex } from '../../context/contexts';
 
-import {
-	Bell,
-	ChevronDown,
-	House,
-	LayoutGrid,
-	LogOut,
-	Mail,
-	Search,
-	SunMoon,
-	User,
-	UserRound,
-} from 'lucide-react';
+import { Bell, ChevronDown, LogOut, Search, SunMoon, User } from 'lucide-react';
 import { AuthContex } from '../../context/Auth.contex';
 
 export const Navbar = () => {
@@ -24,6 +13,11 @@ export const Navbar = () => {
 	const { currentUser } = use(AuthContex);
 
 	console.log(currentUser);
+
+	const handelDropDaw = () => {
+		const dropDaw = document.querySelector('.user-dropdaw');
+		dropDaw?.classList.toggle('active');
+	}; 
 
 	return (
 		<nav className='navbar'>
@@ -34,7 +28,6 @@ export const Navbar = () => {
 
 				{/* <House size={20} />
 				<LayoutGrid size={20} /> */}
-				<SunMoon size={20} onClick={toggle} />
 
 				<div className='search'>
 					<Search size={20} />
@@ -43,7 +36,7 @@ export const Navbar = () => {
 			</div>
 
 			<div className='right'>
-				<div className='user'>
+				<div className='user' onClick={handelDropDaw}>
 					<img
 						src={currentUser?.profilePicture}
 						alt='Imagen del usuario'
@@ -58,18 +51,20 @@ export const Navbar = () => {
 						<li className='user-dropdaw__item'>
 							<User /> <span> Profile </span>
 						</li>
+
 						<li className='user-dropdaw__item'>
 							<Bell /> <span> Notifications </span>
 						</li>
+
+						<li className='user-dropdaw__item' onClick={toggle}>
+							<SunMoon /> <span> Dark Mode </span>
+						</li>
+
 						<li className='user-dropdaw__item'>
 							<LogOut /> <span> log out </span>
 						</li>
 					</ul>
 				</div>
-
-				{/* <UserRound size={20} />
-				<Mail size={20} />
-				<Bell size={20} /> */}
 			</div>
 		</nav>
 	);
