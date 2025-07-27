@@ -21,21 +21,21 @@ export const Notification = () => {
 					<NotificationItem
 						photouser={photo_user}
 						username={'frankies sullivan'}
-						isRead={false}
+						isRead={true}
 						notificationType='follow'
 					/>
 
 					<NotificationItem
 						photouser={photo_user}
 						username={'frankies sullivan'}
-						isRead={false}
+						isRead={true}
 						notificationType='like'
 					/>
 
 					<NotificationItem
 						photouser={photo_user}
 						username={'frankies sullivan'}
-						isRead={false}
+						isRead={true}
 						notificationType='comment'
 					/>
 				</section>

@@ -26,7 +26,7 @@ export const NotificationItem = ({
 						height={50}
 					/>
 					<p className='item-info__text'>
-						<span className='item-info__text--bold'>{username}</span> follow yuo
+						<span className='item-info__text--bold'>@{username}</span> follow yuo
 					</p>
 				</div>
 
@@ -52,7 +52,7 @@ export const NotificationItem = ({
 						height={50}
 					/>
 					<p className='item-info__text'>
-						<span className='item-info__text--bold'>{username}</span> liked your post
+						<span className='item-info__text--bold'>@{username}</span> liked your post
 					</p>
 				</div>
 
@@ -74,12 +74,14 @@ export const NotificationItem = ({
 						alt='imagen user'
 						className='item-info__img'
 						loading='lazy'
-						width={50}
-						height={50}
+						// width={50}
+						// height={50}
 					/>
 					<p className='item-info__text'>
-						<span className='item-info__text--bold'>{username}</span> follow yuo
+						<span className='item-info__text--bold'>@{username}</span> follow yuo
 					</p>
+
+					
 				</div>
 
 				<div className='read'>
