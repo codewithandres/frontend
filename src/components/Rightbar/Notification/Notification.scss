@@ -76,6 +76,16 @@
 						gap: 0.5rem;
 						justify-content: flex-start;
 
+						&:has(figure) {
+							flex-wrap: wrap;
+						}
+
+						figure {
+							display: flex;
+							align-items: center;
+							gap: 0.5rem;
+						}
+
 						.item-info__img {
 							width: 50px;
 							height: 40px;
@@ -93,6 +103,25 @@
 								color: themed('textColor');
 								font-size: small;
 								font-weight: 500;
+							}
+						}
+
+						.item-info__commet {
+							width: 85%;
+							background-color: themed('bg');
+							margin-left: 1rem;
+							padding: 0.5rem;
+							border-radius: 1rem;
+							height: 5vh;
+							overflow: clip;
+
+							p {
+								width: 150px;
+								overflow: clip;
+								white-space: nowrap;
+								text-overflow: ellipsis;
+								color: themed('textColorSoft');
+								font-size: smaller;
 							}
 						}
 					}

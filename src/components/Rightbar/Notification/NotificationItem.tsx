@@ -69,19 +69,23 @@ export const NotificationItem = ({
 		return (
 			<div className='notification__body__item'>
 				<div className='notification__body__item--info'>
-					<img
-						src={photouser}
-						alt='imagen user'
-						className='item-info__img'
-						loading='lazy'
-						// width={50}
-						// height={50}
-					/>
-					<p className='item-info__text'>
-						<span className='item-info__text--bold'>@{username}</span> follow yuo
-					</p>
+					<figure>
+						<img
+							src={photouser}
+							alt='imagen user'
+							className='item-info__img'
+							loading='lazy'
+							// width={50}
+							// height={50}
+						/>
+						<p className='item-info__text'>
+							<span className='item-info__text--bold'>@{username}</span> follow yuo
+						</p>
+					</figure>
 
-					
+					<section className='item-info__commet'>
+						<p>love the background on this.! would love to learm how</p>
+					</section>
 				</div>
 
 				<div className='read'>
