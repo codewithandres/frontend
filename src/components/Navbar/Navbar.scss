@@ -36,38 +36,37 @@
 					color: themed('logo');
 				}
 			}
+		}
 
-			.search {
-				display: flex;
-				align-items: center;
-				gap: 1rem;
-				box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
-					rgb(209, 213, 219) 0px 0px 0px 1px inset;
-				border-radius: 0.4rem;
-				padding-left: 0.5rem;
-				display: flex;
-				align-items: center;
-				overflow: clip;
-				width: 350px;
+		.search {
+			width: 400px;
+			border-radius: 0.4rem;
+			padding-left: 0.5rem;
+			overflow: clip;
 
-				@include tablet {
-					width: 200px;
-				}
+			display: flex;
+			align-items: center;
+			gap: 1rem;
 
-				input {
-					background-color: transparent;
-					outline: none;
-					padding: 0.6rem;
-					width: 100%;
-					height: 100%;
-					border: none;
-					padding: 0.7rem;
-					font-size: 0.9rem;
-					color: themed('textColorSoft');
+			box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+				rgba(209, 213, 219, 0.356) 0px 0px 0px 1px inset;
+			@include tablet {
+				width: 200px;
+			}
 
-					@include mobile {
-						display: none;
-					}
+			input {
+				background-color: transparent;
+				outline: none;
+				padding: 0.6rem;
+				width: 100%;
+				height: 100%;
+				border: none;
+				padding: 0.7rem;
+				font-size: 0.9rem;
+				color: themed('textColorSoft');
+
+				@include mobile {
+					display: none;
 				}
 			}
 		}

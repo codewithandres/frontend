@@ -17,7 +17,7 @@ export const Navbar = () => {
 	const handelDropDaw = () => {
 		const dropDaw = document.querySelector('.user-dropdaw');
 		dropDaw?.classList.toggle('active');
-	}; 
+	};
 
 	return (
 		<nav className='navbar'>
@@ -25,14 +25,11 @@ export const Navbar = () => {
 				<Link to={'/home'}>
 					<span> codewithsocial </span>
 				</Link>
+			</div>
 
-				{/* <House size={20} />
-				<LayoutGrid size={20} /> */}
-
-				<div className='search'>
-					<Search size={20} />
-					<input type='search' placeholder='look for' required />
-				</div>
+			<div className='search'>
+				<Search size={20} />
+				<input type='search' placeholder='look for' required />
 			</div>
 
 			<div className='right'>
