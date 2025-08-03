@@ -1,4 +1,4 @@
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Link } from 'react-router';
@@ -6,6 +6,7 @@ import { Buttom } from '../../components/Buttom';
 
 import './sing-up.scss';
 import { authSingUp } from '../../scheme/auth.scheme';
+import { useAuthSingUpHook } from '../../hooks/use-authSingUp.hook';
 
 export const SingUp = () => {
 	const {
@@ -15,7 +16,7 @@ export const SingUp = () => {
 		// watch,
 	} = useForm<TypeForm>({ resolver: zodResolver(authSingUp) });
 
-	const onSubmit: SubmitHandler<TypeForm> = data => console.log(data);
+	const { onSubmit, response } = useAuthSingUpHook();
 
 	return (
 		<div className='sing-up'>
@@ -32,6 +33,8 @@ export const SingUp = () => {
 				</div>
 
 				<div className='right'>
+					{!response?.sucsses ? response?.message : response?.message}
+
 					<h2>Sing up</h2>
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<input type='text' placeholder='Username' {...register('username')} />
