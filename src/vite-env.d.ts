@@ -19,3 +19,11 @@ declare interface AuthContextType {
 	// readonly loading: boolean;
 	// readonly error: Error | null;
 }
+
+declare interface TypeForm {
+	username: string;
+	name: string;
+	email: string;
+	password: string;
+	confirmPassword: string;
+}
