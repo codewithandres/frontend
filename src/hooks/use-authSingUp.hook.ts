@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 
 import axios, { AxiosError } from 'axios';
+import { toast } from 'sonner';
 
 interface ResppnseMssage {
 	sucsses: boolean;
@@ -30,6 +31,10 @@ export const useAuthSingUpHook = () => {
 			}
 
 			setResponse({ sucsses: true, message: data.message });
+
+			toast.success('account created successfully', {
+				position: 'top-center',
+			});
 		} catch (error) {
 			console.log(error);
 
@@ -42,11 +47,15 @@ export const useAuthSingUpHook = () => {
 
 					setResponse({ sucsses: responseAxios.sucsses, message: responseAxios.message });
 
-					console.log(
-						'error en la repuesta:',
-						axiosError.response.status,
-						axiosError.response.data
-					);
+					toast.error('Error creating account', {
+						description: response?.message,
+						position: 'top-center',
+						action: {
+							// * realizar caulquier accion
+							label: 'Close',
+							onClick: () => toast.dismiss(),
+						},
+					});
 				}
 			}
 		}

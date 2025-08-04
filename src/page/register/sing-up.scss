@@ -103,6 +103,21 @@ $bg-primary-alpha: oklch(99.4% 0.0015 266.8);
 					&:focus {
 						box-shadow: oklch(60.315% 0.21744 257.629 / 0.3) 0px 0px 0px 3px;
 					}
+
+					&:is(.input-invalid) {
+						box-shadow: oklch(62.793% 0.25768 29.223 / 0.05) 0px 6px 24px 0px,
+							oklch(62.793% 0.25768 29.223 / 0.08) 0px 0px 0px 2px;
+					}
+					&:disabled {
+						background-color: oklch(98.2% 0.003 277.7 / 0.5);
+						pointer-events: none;
+						cursor: not-allowed;
+					}
+				}
+				.error {
+					color: oklch(62.793% 0.25768 29.223);
+					font-size: smaller;
+					font-weight: 500;
 				}
 			}
 		}

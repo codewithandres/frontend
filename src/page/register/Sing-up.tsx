@@ -12,11 +12,12 @@ export const SingUp = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors, isLoading },
+
 		// watch,
 	} = useForm<TypeForm>({ resolver: zodResolver(authSingUp) });
 
-	const { onSubmit, response } = useAuthSingUpHook();
+	const { onSubmit } = useAuthSingUpHook();
 
 	return (
 		<div className='sing-up'>
@@ -33,23 +34,46 @@ export const SingUp = () => {
 				</div>
 
 				<div className='right'>
-					{!response?.sucsses ? response?.message : response?.message}
-
 					<h2>Sing up</h2>
 					<form onSubmit={handleSubmit(onSubmit)}>
-						<input type='text' placeholder='Username' {...register('username')} />
+						<input
+							type='text'
+							placeholder='Username'
+							{...register('username')}
+							disabled={isLoading}
+							className={errors.username ? 'input-invalid' : ''}
+						/>
 						{errors.username?.message && (
 							<span className='error'>{errors.username.message}</span>
 						)}
 
-						<input type='text' placeholder='Joe Done' {...register('name')} />
+						<input
+							type='text'
+							placeholder='Joe Done'
+							disabled={isLoading}
+							{...register('name')}
+							className={errors.username ? 'input-invalid' : ''}
+						/>
 						{errors.name?.message && <span className='error'>{errors.name.message}</span>}
 
-						<input type='email' placeholder='correo@demo.com' {...register('email')} />
+						<input
+							type='email'
+							placeholder='correo@demo.com'
+							disabled={isLoading}
+							{...register('email')}
+							className={errors.username ? 'input-invalid' : ''}
+						/>
 						{errors.email?.message && (
 							<span className='error'>{errors.email.message}</span>
 						)}
-						<input type='password' placeholder='Password' {...register('password')} />
+
+						<input
+							type='password'
+							placeholder='Password'
+							{...register('password')}
+							disabled={isLoading}
+							className={errors.username ? 'input-invalid' : ''}
+						/>
 						{errors.password?.message && (
 							<span className='error'>{errors.password.message}</span>
 						)}
@@ -58,11 +82,14 @@ export const SingUp = () => {
 							type='password'
 							placeholder='Confirm Password'
 							{...register('confirmPassword')}
+							disabled={isLoading}
+							className={errors.username ? 'input-invalid' : ''}
 						/>
 						{errors.confirmPassword?.message && (
 							<span className='error'>{errors.confirmPassword.message}</span>
 						)}
-						<Buttom>Sing up</Buttom>
+
+						<Buttom> {isLoading ? 'creating account...' : 'Sing up'} </Buttom>
 					</form>
 					{/* <div>{JSON.stringify(watch(), null, 2)}</div> */}
 				</div>

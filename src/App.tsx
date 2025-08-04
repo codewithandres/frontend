@@ -8,9 +8,13 @@ import { Profile } from './page/profile/Profile';
 
 import { AuthLayout } from './Layout/Auth-layout';
 
+import { Toaster } from 'sonner';
+
 function App() {
 	return (
 		<>
+			<Toaster />
+			
 			<BrowserRouter>
 				<Routes>
 					<Route element={<RootLayout />}>
