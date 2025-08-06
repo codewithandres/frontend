@@ -17,6 +17,8 @@ interface PostProps {
 	// Metods
 }
 
+
+
 export const Post = ({ ...post }: PostProps) => {
 	//  Tempory
 	// const isLike = false;

@@ -1,6 +1,6 @@
+import { Post } from '../Post/Post';
 import './posts.scss';
 
-import { Post } from '../Post/post';
 
 export const Posts = () => {
 	// TEMPORY
