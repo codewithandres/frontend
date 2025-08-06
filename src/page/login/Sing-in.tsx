@@ -1,20 +1,31 @@
-import { use, type FormEvent } from 'react';
+// import photo_user from '../../assets/phot_user.jpg';
+
 import { Link, useNavigate } from 'react-router';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 
 import './singIn.scss';
 
-import { AuthContex } from '../../context/Auth.contex';
 import { Buttom } from '../../components/Buttom';
 
+import { useAuthContext } from '../../context/Auth.contex';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { authSingIn } from '../../scheme/auth.scheme';
+
 export const SingIn = () => {
+	const { loginWithEmailandPassword } = useAuthContext();
+
+	const { register, handleSubmit, formState } = useForm<TypeFormSingIn>({
+		resolver: zodResolver(authSingIn),
+	});
+
+	const { username, password } = formState.errors;
+
 	const navigate = useNavigate();
 
-	const { Login } = use(AuthContex);
+	const onLogin: SubmitHandler<TypeFormSingIn> = async ({ username, password }) => {
+		loginWithEmailandPassword(username, password);
 
-	const handleLogin = (event: FormEvent) => {
-		event.preventDefault();
-		Login();
-		navigate('/')
+		navigate('/');
 	};
 
 	return (
@@ -32,11 +43,14 @@ export const SingIn = () => {
 				</div>
 				<div className='right'>
 					<h2>Sing In</h2>
-					<form>
-						<input type='text' placeholder='Username' />
-						<input type='password' placeholder='Password' />
+					<form onSubmit={handleSubmit(onLogin)}>
+						<input type='text' placeholder='Username' {...register('username')} />
+						{username && <span className='error'>{username?.message}</span>}
 
-						<Buttom onLogin={handleLogin}>Sing in</Buttom>
+						<input type='password' placeholder='Password' {...register('password')} />
+						{password && <span className='error'>{username?.message}</span>}
+
+						<Buttom>Sing in</Buttom>
 					</form>
 				</div>
 			</div>

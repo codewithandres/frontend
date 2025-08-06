@@ -6,14 +6,14 @@ import App from './App.tsx'
 import './index.css' with { type: 'css'}
 
 import { DarkModeProvaider } from './context/dark-mode.context.tsx';
-import { AuthContextProvaider } from './context/Auth.contex.tsx';
+import {  AuthProvider } from './context/Auth.contex.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <DarkModeProvaider>
-      <AuthContextProvaider>
-      <App />
-      </AuthContextProvaider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </DarkModeProvaider>
   </StrictMode>,
 );

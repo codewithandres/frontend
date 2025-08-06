@@ -27,3 +27,8 @@ declare interface TypeForm {
 	password: string;
 	confirmPassword: string;
 }
+
+declare interface TypeFormSingIn {
+	username: string;
+	password: string;
+}

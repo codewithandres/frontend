@@ -1,18 +1,22 @@
 import { use } from 'react';
+
 import './Navbar.scss';
+
+import avatarPlaceholder from '../../assets/Avatar-Profile-Vector-PNG-Pic.png';
 
 import { Link } from 'react-router';
 
 import { DarkModeContex } from '../../context/contexts';
 
 import { Bell, ChevronDown, LogOut, Search, SunMoon, User } from 'lucide-react';
-import { AuthContex } from '../../context/Auth.contex';
+import { useAuthContext } from '../../context/Auth.contex';
 
 export const Navbar = () => {
 	const { toggle } = use(DarkModeContex);
-	const { currentUser } = use(AuthContex);
 
-	console.log(currentUser);
+	const { user } = useAuthContext();
+
+	console.log(status);
 
 	const handelDropDaw = () => {
 		const dropDaw = document.querySelector('.user-dropdaw');
@@ -35,11 +39,12 @@ export const Navbar = () => {
 			<div className='right'>
 				<div className='user' onClick={handelDropDaw}>
 					<img
-						src={currentUser?.profilePicture}
+						src={user?.profilePicture ?? avatarPlaceholder}
 						alt='Imagen del usuario'
 						loading='lazy'
 					/>
-					<span>{currentUser?.username}</span>
+					<span>{user?.username}</span>
+					<span> </span>
 					<ChevronDown />
 				</div>
 

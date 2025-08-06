@@ -2,7 +2,9 @@ import { use } from 'react';
 
 import './Leftbar.scss';
 
-import { AuthContex } from '../../context/Auth.contex';
+import avatarPlaceholder from '../../assets/Avatar-Profile-Vector-PNG-Pic.png';
+
+import { useAuthContext } from '../../context/Auth.contex';
 
 import {
 	ContactRound,
@@ -18,21 +20,20 @@ import {
 } from 'lucide-react';
 
 export const Leftbar = () => {
-	const { currentUser } = use(AuthContex);
-
+	const { user } = useAuthContext();
 	return (
 		<div className='leftbar'>
 			<div className='container'>
 				<div className='menu'>
 					<div className='user'>
 						<img
-							src={currentUser?.profilePicture}
+							src={user?.profilePicture ?? avatarPlaceholder}
 							width={30}
 							height={30}
 							loading='lazy'
 						/>
 
-						<span>{currentUser?.username} </span>
+						<span>{user?.username} </span>
 					</div>
 
 					<div className='item'>

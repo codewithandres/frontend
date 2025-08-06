@@ -24,3 +24,11 @@ export const authSingUp = z
 		path: ['confirmPassword'],
 		message: 'The passwords do not match.',
 	});
+
+export const authSingIn = z.object({
+	username: z
+		.string()
+		.min(3, { message: 'The username must have at least 3 characters.' })
+		.max(20, { message: 'The username must have a maximum of 20 characters.' }),
+	password: z.string(),
+});

@@ -14,7 +14,7 @@ function App() {
 	return (
 		<>
 			<Toaster />
-			
+
 			<BrowserRouter>
 				<Routes>
 					<Route element={<RootLayout />}>
