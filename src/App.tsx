@@ -9,11 +9,15 @@ import { Profile } from './page/profile/Profile';
 import { AuthLayout } from './Layout/Auth-layout';
 
 import { Toaster } from 'sonner';
+import { use } from 'react';
+import { DarkModeContex } from './context/contexts';
 
 function App() {
+	const { darkMode } = use(DarkModeContex);
+
 	return (
 		<>
-			<Toaster />
+			<Toaster theme={darkMode ? 'dark' : 'light'} position='top-center' />
 
 			<BrowserRouter>
 				<Routes>

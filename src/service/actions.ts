@@ -11,3 +11,23 @@ export const getPosts = async (): Promise<Datum[]> => {
 	const { data } = await makeRequest.get<Posts>('/posts');
 	return data.data || [];
 };
+
+// Mutation Posts
+
+declare interface PostLike {
+	description: string;
+	image?: string | null;
+}
+
+declare interface PostResponse {
+	success: boolean;
+	message: string;
+}
+
+export const createPost = async (post: PostLike): Promise<PostResponse> => {
+	await sleep(2000);
+
+	const { data } = await makeRequest.post<PostResponse>('/posts', post);
+	console.log(data);
+	return data;
+};

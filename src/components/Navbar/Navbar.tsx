@@ -16,8 +16,6 @@ export const Navbar = () => {
 
 	const { user } = useAuthContext();
 
-	console.log(status);
-
 	const handelDropDaw = () => {
 		const dropDaw = document.querySelector('.user-dropdaw');
 		dropDaw?.classList.toggle('active');
