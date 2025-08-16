@@ -1,7 +1,9 @@
-import { use } from 'react';
 import './stories.scss';
-import { AuthContex } from '../../context/Auth.contex';
+import placeholderStory from '../../assets/placeholder-user-stories.jpg';
+import { useAuthContext } from '../../context/Auth.contex';
+
 import { Plus } from 'lucide-react';
+
 import { StoryItem } from '../Story-item';
 
 // TEMPORY
@@ -33,20 +35,20 @@ const stories = [
 ] as const;
 
 export const Stories = () => {
-	const { currentUser } = use(AuthContex);
-	if (!currentUser) return;
+	const { user } = useAuthContext();
+	if (!user) return;
 
 	return (
 		<div className='stories'>
 			<StoryItem
-				id={currentUser.id}
-				image={currentUser.profilePicture}
-				name={currentUser.username}
+				id={user.id}
+				image={user.profilePicture ?? placeholderStory}
+				name={user.username}
 				icon={<Plus />}
 			/>
 
 			{stories.map(story => (
-				<StoryItem {...story} />
+				<StoryItem {...story} key={story.id} />
 			))}
 		</div>
 	);

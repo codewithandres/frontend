@@ -1,4 +1,3 @@
-import React from 'react';
 import { ProtectedRoute } from '../components/ProtectedRoute';
 import { Outlet } from 'react-router';
 

@@ -1,6 +1,5 @@
-import { use } from 'react';
 import './commets.scss';
-import { AuthContex } from '../../context/Auth.contex';
+import { useAuthContext } from '../../context/Auth.contex';
 import ButtonSend from '../button-send/Button-send';
 
 export const Commets = () => {
@@ -23,13 +22,13 @@ export const Commets = () => {
 		},
 	];
 
-	const { currentUser } = use(AuthContex);
+	const { user } = useAuthContext();
 
 	return (
 		<div className='comments'>
 			<div className='comments__write'>
 				<img
-					src={currentUser?.profilePicture}
+					src={user?.profilePicture}
 					alt='Photo Profile'
 					width={40}
 					height={40}

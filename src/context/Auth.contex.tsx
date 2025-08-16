@@ -1,12 +1,14 @@
-import { createContext, useContext, useState, type PropsWithChildren } from 'react';
+import { createContext, useContext, type PropsWithChildren } from 'react';
 import { usePrersistedState } from '../hooks/use-prersistedState';
 import axios from 'axios';
 import type { ResponseSingin } from '../interface/responseTypeSingin';
 
-enum AuthStatus {
-	'authenticated',
-	'unauthenticated',
-}
+const AuthStatus = {
+	authenticated: 'authenticated',
+	unauthenticated: 'unauthenticated',
+} as const;
+
+declare type AuthStatus = (typeof AuthStatus)[keyof typeof AuthStatus];
 
 interface AuthState {
 	status: AuthStatus;
@@ -17,7 +19,7 @@ interface AuthState {
 	loginWithEmailandPassword: (username: string, password: string) => void;
 }
 
-interface User {
+declare interface User {
 	id: number;
 	username: string;
 	name: string;

@@ -8,11 +8,7 @@ import './posts.scss';
 
 export const Posts = () => {
 	const { postsQuery } = usePosts();
-
-	// console.log(postsQuery.error);
-
-	console.log(postsQuery.data);
-
+	
 	return (
 		<div className='posts'>
 			<CreatePost />

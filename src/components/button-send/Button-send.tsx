@@ -1,21 +1,16 @@
-import type {
-	CSSProperties,
-	HtmlHTMLAttributes,
-	PropsWithChildren,
-	ReactNode,
-} from 'react';
+import type { ReactNode } from 'react';
 
 import './button-send.scss';
-import type React from 'react';
 
 interface ButtonProps {
 	children: ReactNode;
+	className?: string;
 }
 
-const ButtonSend = ({ children }: ButtonProps) => {
+const ButtonSend = ({ children, className }: ButtonProps) => {
 	return (
 		<>
-			<button className='comment-button'>
+			<button className={`comment-button  ${className ?? ''}`}>
 				<div className='svg-wrapper-1'>
 					<div className='svg-wrapper'>
 						<svg

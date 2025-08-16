@@ -1,16 +1,25 @@
-import { useState } from 'react';
-import { useAuthContext } from '../../context/Auth.contex';
-import { Image, X } from 'lucide-react';
 import './CreatePost.scss';
 
-import avatarPlaceholder from '../../assets/Avatar-Profile-Vector-PNG-Pic.png';
+import { use, useMemo, useState } from 'react';
+
+import { useAuthContext } from '../../context/Auth.contex';
+
 import { usePostMutation } from '../../hooks/use-postMutation';
+
+import { Image, SmilePlus, X } from 'lucide-react';
+
+import avatarPlaceholder from '../../assets/Avatar-Profile-Vector-PNG-Pic.png';
 import { useEdgeStore } from '../../src/lib/edgestore';
-import { Progress } from './progress-loader/progress';
+import EmojiPicker, { Theme, EmojiStyle, type EmojiClickData } from 'emoji-picker-react';
+import { Progress } from './progress-loader/Progress';
+import { DarkModeContex } from '../../context/contexts';
 
 export const CreatePost = () => {
 	const { user } = useAuthContext();
+	const { darkMode } = use(DarkModeContex);
 	const { edgestore } = useEdgeStore();
+
+	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
 	const [description, setDescription] = useState('');
 	const [image, setImage] = useState<File | null>(null);
@@ -33,21 +42,30 @@ export const CreatePost = () => {
 		setImagePreview('');
 	};
 
+	const handleEmoji = useMemo(
+		() => (event: EmojiClickData) =>
+			setDescription(current => `${current}${event.emoji}`),
+		[]
+	);
+
+	// const handleEmoji = (event: EmojiClickData) =>
+	// 	setDescription(current => `${current}${event.emoji}`);
+
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-
 		if (!description.trim()) return;
 
+		let imageUrl = null;
 		if (image) {
 			const response = await edgestore.PrivateFiles.upload({
 				file: image,
 				input: { type: 'private' },
-				onProgressChange: (progress: number) => setProgresLoading(progress),
+				onProgressChange: setProgresLoading,
 			});
-			postMutation.mutate({ description, image: response.url });
+			imageUrl = response.url;
 		}
 
-		postMutation.mutate({ description });
+		postMutation.mutate({ description, image: imageUrl });
 
 		// Reset form
 		setDescription('');
@@ -75,6 +93,16 @@ export const CreatePost = () => {
 					className='create-post__textarea'
 					rows={3}
 				/>
+				<SmilePlus onClick={() => setIsExpanded(current => !current)} />
+
+				<EmojiPicker
+					open={isExpanded}
+					onEmojiClick={handleEmoji}
+					theme={darkMode ? Theme.DARK : Theme.LIGHT}
+					className='create-post__emoji-picker'
+					emojiStyle={EmojiStyle.FACEBOOK}
+				/>
+
 				{progresLoading > 0 && <Progress progresWidt={progresLoading} />}
 
 				{imagePreview && (
