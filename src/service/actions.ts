@@ -25,6 +25,8 @@ declare interface PostResponse {
 }
 
 export const createPost = async (post: PostLike): Promise<PostResponse> => {
+	console.log({ post });
+
 	await sleep(2000);
 
 	const { data } = await makeRequest.post<PostResponse>('/posts', post);

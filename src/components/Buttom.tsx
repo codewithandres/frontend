@@ -11,7 +11,7 @@ export const Buttom = ( {children,  onLogin   }: PropsButton ) => {
 	return (
 		<>
 			<button className='button' onClick={onLogin}>
-				<span className='shadow'></span>
+				<span  className='shadow'></span>
 				<span className='edge'></span>
 				<div className='front'>
           <span>{ children} </span>
