@@ -45,7 +45,11 @@
 						display: inline-flex;
 						flex-direction: column;
 						gap: 0.1rem;
+						p {
+							text-transform: capitalize;
+						}
 						span {
+							color: themed('textColorSoft');
 							font-size: small;
 							font-weight: normal;
 						}

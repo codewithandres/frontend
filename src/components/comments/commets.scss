@@ -2,6 +2,8 @@
 
 .comments {
 	@include themify($themes) {
+		animation: scale-up-ver-top 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+
 		img {
 			width: 40px;
 			height: 40px;
@@ -66,5 +68,20 @@
 				color: themed('textColorSoft');
 			}
 		}
+	}
+}
+
+@keyframes scale-up-ver-top {
+	0% {
+		transform: scaleY(0.4);
+		transform-origin: 100% 0%;
+		opacity: 0;
+		filter: blur(12px);
+	}
+	100% {
+		transform: scaleY(1);
+		transform-origin: 100% 0%;
+		opacity: 1;
+		filter: blur(0px);
 	}
 }

@@ -9,6 +9,7 @@ import { Commets } from '../comments/Commets';
 import type { Datum } from '../../interface/ResponseTypePosts';
 
 import placeholderAvat from '../../assets/Avatar-Profile-Vector-PNG-Pic.png';
+import { formateRelattiveTime } from '../../utils/dateFormater';
 
 interface PostProps {
 	Post: Datum;
@@ -21,7 +22,7 @@ export const Post = ({ Post }: PostProps) => {
 	const [commnetOpen, setCommnetOpen] = useState<boolean>(false);
 
 	return (
-		<div className='post'>
+		<div className={`post`}>
 			<div className='container'>
 				<div className='user'>
 					<div className='userInfo'>
@@ -38,7 +39,7 @@ export const Post = ({ Post }: PostProps) => {
 							>
 								<span className='name'>{Post.name}</span>
 							</Link>
-							<span className='date'> {Post.createdAt.toString()} </span>
+							<span className='date'> {formateRelattiveTime(Post.createdAt)} </span>
 						</div>
 					</div>
 					<Ellipsis />
@@ -50,17 +51,17 @@ export const Post = ({ Post }: PostProps) => {
 				</div>
 
 				<div className='info'>
-					<div className='item'>
+					<button className='item'>
 						<Like /> 12 Likes
-					</div>
+					</button>
 
-					<div className='item' onClick={() => setCommnetOpen(!commnetOpen)}>
+					<button className='item' onClick={() => setCommnetOpen(!commnetOpen)}>
 						<MessageCircleMore strokeWidth='1.25' size={20} /> 9 comments
-					</div>
+					</button>
 
-					<div className='item'>
+					<button className='item'>
 						<ExternalLink strokeWidth='1.25' size={20} /> 12 Likes
-					</div>
+					</button>
 				</div>
 
 				{commnetOpen && <Commets />}
