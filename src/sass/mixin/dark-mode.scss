@@ -6,6 +6,13 @@ $themes: (
 		bgSoft: oklch(93.894% 0.00934 232.784),
 		textColorSoft: oklch(52.932% 0.00491 236.972),
 		border: oklch(86.686% 0.0001 271.152),
+		skeleton:
+			linear-gradient(
+				90deg,
+				oklch(95.514% 0.00011 271.152) 25%,
+				oklch(90.67% 0.0001 271.152) 50%,
+				oklch(95.514% 0.00011 271.152) 75%
+			),
 	),
 	dark: (
 		textColor: oklch(94.479% 0.00926 258.491),
@@ -14,6 +21,13 @@ $themes: (
 		bgSoft: oklch(20.921% 0.04123 268.144),
 		textColorSoft: oklch(72.829% 0.00761 268.561 / 0.705),
 		border: oklch(78.393% 0.01147 256.825 / 0.527),
+		skeleton:
+			linear-gradient(
+				90deg,
+				oklch(28.502% 0.00003 271.152) 25%,
+				oklch(34.846% 0.00004 271.152) 50%,
+				oklch(28.502% 0.00003 271.152) 75%
+			),
 	),
 );
 

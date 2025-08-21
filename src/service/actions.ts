@@ -6,8 +6,6 @@ export const sleep = (ms: number): Promise<void> => {
 };
 
 export const getPosts = async (): Promise<Datum[]> => {
-	await sleep(5000);
-
 	const { data } = await makeRequest.get<Posts>('/posts');
 	return data.data || [];
 };
@@ -24,12 +22,15 @@ declare interface PostResponse {
 	message: string;
 }
 
-export const createPost = async (post: PostLike): Promise<PostResponse> => {
+declare interface PostWitdMentions extends PostLike {
+	mentions?: string;
+}
+
+export const createPost = async (post: PostWitdMentions): Promise<PostResponse> => {
 	console.log({ post });
 
-	await sleep(2000);
-
 	const { data } = await makeRequest.post<PostResponse>('/posts', post);
-	console.log(data);
+	console.log({ data });
+
 	return data;
 };

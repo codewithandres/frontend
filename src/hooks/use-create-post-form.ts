@@ -30,14 +30,19 @@ export const useCreatePostForm = () => {
 		.querySelector('.create-post')
 		?.addEventListener('click', () => setIsExpanded(false));
 
-	const handleSubmit = async (event: FormEvent) => {
+	const handleSubmit = async (event: FormEvent, mentionData?: { content: string; mentionedUsers: string[] }) => {
 		event.preventDefault();
 
-		if (!description.trim()) return;
+		const content = mentionData?.content || description;
+		if (!content.trim()) return;
 
 		const imageUrl = await imageUpload.uploadImage();
 
-		postMutation.mutate({ description, ...(imageUrl && { image: imageUrl }) });
+		postMutation.mutate({ 
+			description: content, 
+			...(imageUrl && { image: imageUrl }),
+			...(mentionData?.mentionedUsers?.length && { mentionedUsers: mentionData.mentionedUsers })
+		});
 
 		resetForm();
 	};

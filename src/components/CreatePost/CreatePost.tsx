@@ -5,16 +5,17 @@ import { use } from 'react';
 import { useAuthContext } from '../../context/Auth.contex';
 
 import { Image, SmilePlus, X } from 'lucide-react';
+import EmojiPicker, { Theme, EmojiStyle } from 'emoji-picker-react';
 
 import avatarPlaceholder from '../../assets/Avatar-Profile-Vector-PNG-Pic.png';
-import EmojiPicker, { Theme, EmojiStyle } from 'emoji-picker-react';
 import { Progress } from './progress-loader/Progress';
 import { DarkModeContex } from '../../context/contexts';
 import { useCreatePostForm } from '../../hooks/use-create-post-form';
 
 export const CreatePost = () => {
-	// custom hook Autentication
+	// custom hook Authentication
 	const { user } = useAuthContext();
+
 	// custom hook para crear un post y manejo de formulario
 	const {
 		// Property/
@@ -24,7 +25,7 @@ export const CreatePost = () => {
 		uploadProgres,
 		isExpanded,
 		isFormExpanded,
-		// Metods
+		// Methods
 		setDescription,
 		handleSubmit,
 		handleImagenChange,
@@ -35,7 +36,7 @@ export const CreatePost = () => {
 
 	// custom hook para el dark mode
 	const { darkMode } = use(DarkModeContex);
-	
+
 	return (
 		<div className={`create-post ${isFormExpanded && 'expanded'}`}>
 			<div className='create-post__header'>
@@ -54,6 +55,7 @@ export const CreatePost = () => {
 					onChange={({ target }) => setDescription(target.value)}
 					className='create-post__textarea'
 					rows={3}
+					name='createPost'
 				/>
 
 				<EmojiPicker
@@ -83,10 +85,16 @@ export const CreatePost = () => {
 				)}
 				<div className='create-post__actions'>
 					<div className='create-post__actions__group'>
-						<label className='create-post__image-upload'>
+						<label className='create-post__image-upload' htmlFor='inputFile'>
 							<Image size={20} />
 							<span>Photo</span>
-							<input type='file' accept='image/*' onChange={handleImagenChange} hidden />
+							<input
+								type='file'
+								accept='image/*'
+								onChange={handleImagenChange}
+								hidden
+								name='inputFile'
+							/>
 						</label>
 
 						<label
