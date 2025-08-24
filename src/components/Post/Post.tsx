@@ -4,12 +4,21 @@ import { Link } from 'react-router';
 import { Ellipsis, ExternalLink, MessageCircleMore } from 'lucide-react';
 
 import Like from '../Like/Like';
-import { useState } from 'react';
-import { Commets } from '../comments/Commets';
+
+import { lazy, Suspense, useState } from 'react';
+
 import type { Datum } from '../../interface/ResponseTypePosts';
 
 import placeholderAvat from '../../assets/Avatar-Profile-Vector-PNG-Pic.png';
+
 import { formateRelattiveTime } from '../../utils/dateFormater';
+
+import { useComments } from '../../hooks/use-commets';
+
+const Commets = lazy(() => import('../comments/Commets'));
+
+import { Ring } from 'ldrs/react';
+import 'ldrs/react/Ring.css';
 
 interface PostProps {
 	Post: Datum;
@@ -20,6 +29,8 @@ export const Post = ({ Post }: PostProps) => {
 	// const isLike = false;
 
 	const [commnetOpen, setCommnetOpen] = useState<boolean>(false);
+
+	const { commentsQuery } = useComments({ postId: String(Post.id) });
 
 	return (
 		<div className={`post`}>
@@ -56,7 +67,8 @@ export const Post = ({ Post }: PostProps) => {
 					</button>
 
 					<button className='item' onClick={() => setCommnetOpen(!commnetOpen)}>
-						<MessageCircleMore strokeWidth='1.25' size={20} /> 9 comments
+						<MessageCircleMore strokeWidth='1.25' size={20} />
+						{commentsQuery.data?.length} comments
 					</button>
 
 					<button className='item'>
@@ -64,7 +76,17 @@ export const Post = ({ Post }: PostProps) => {
 					</button>
 				</div>
 
-				{commnetOpen && <Commets postId={String(Post.id)} />}
+				{commnetOpen && (
+					<Suspense
+						fallback={
+							<div className='loadig-component'>
+								<Ring size='30' stroke='2' bgOpacity='0.41' speed='2' color='#ffff' />
+							</div>
+						}
+					>
+						<Commets postId={String(Post.id)} />
+					</Suspense>
+				)}
 			</div>
 		</div>
 	);

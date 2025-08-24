@@ -97,6 +97,11 @@
 		}
 	}
 }
+.loadig-component {
+	display: grid;
+	place-items: center;
+	margin-block: 1rem;
+}
 
 @keyframes fade-in {
 	0% {

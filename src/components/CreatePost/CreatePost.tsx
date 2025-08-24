@@ -1,16 +1,22 @@
 import './CreatePost.scss';
 
-import { use } from 'react';
+import { lazy, Suspense, use } from 'react';
 
 import { useAuthContext } from '../../context/Auth.contex';
 
 import { Image, SmilePlus, X } from 'lucide-react';
-import EmojiPicker, { Theme, EmojiStyle } from 'emoji-picker-react';
+import { Theme, EmojiStyle } from 'emoji-picker-react';
 
 import avatarPlaceholder from '../../assets/Avatar-Profile-Vector-PNG-Pic.png';
 import { Progress } from './progress-loader/Progress';
 import { DarkModeContex } from '../../context/contexts';
 import { useCreatePostForm } from '../../hooks/use-create-post-form';
+
+// Cargar componente con lazy load
+import { Ring } from 'ldrs/react';
+import 'ldrs/react/Ring.css';
+
+const EmojiPicker = lazy(() => import('emoji-picker-react'));
 
 export const CreatePost = () => {
 	// custom hook Authentication
@@ -103,16 +109,24 @@ export const CreatePost = () => {
 					</button>
 				</div>
 
-				<EmojiPicker
-					open={isExpanded}
-					onEmojiClick={handleEmoji}
-					theme={darkMode ? Theme.DARK : Theme.LIGHT}
-					className='create-post__emoji-picker'
-					emojiStyle={EmojiStyle.FACEBOOK}
-					width={'100%'}
-					lazyLoadEmojis={true}
-					searchDisabled={true}
-				/>
+				<Suspense
+					fallback={
+						<div className='loadig-component'>
+							<Ring size='30' stroke='2' bgOpacity='0.41' speed='2' color='#ffff' />
+						</div>
+					}
+				>
+					<EmojiPicker
+						open={isExpanded}
+						onEmojiClick={handleEmoji}
+						theme={darkMode ? Theme.DARK : Theme.LIGHT}
+						className='create-post__emoji-picker'
+						emojiStyle={EmojiStyle.FACEBOOK}
+						width={'100%'}
+						lazyLoadEmojis={true}
+						searchDisabled={true}
+					/>
+				</Suspense>
 			</form>
 		</div>
 	);

@@ -10,7 +10,7 @@ export const useComments = ({ postId }: Options) => {
 	const queyClient = useQueryClient();
 
 	const commentsQuery = useQuery({
-		queryKey: ['comments'],
+		queryKey: ['comments', { postId }],
 		queryFn: () => getComments(postId),
 		staleTime: 1000 * 60 * 60,
 		retry: false,
@@ -21,8 +21,8 @@ export const useComments = ({ postId }: Options) => {
 		retry: false,
 
 		onSuccess: () => {
-			queyClient.invalidateQueries({ queryKey: ['comments'] });
 			toast.success('Comment created successfully');
+			queyClient.invalidateQueries({ queryKey: ['comments', { postId }] });
 		},
 
 		onError: () => toast.error('Error creating comment'),

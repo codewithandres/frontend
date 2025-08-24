@@ -13,7 +13,7 @@ declare interface Props {
 	postId: string;
 }
 
-export const Commets = ({ postId }: Props) => {
+const Commets = ({ postId }: Props) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const commetCard = useRef<HTMLDivElement>(null);
 
@@ -35,8 +35,7 @@ export const Commets = ({ postId }: Props) => {
 			onSettled: () => (inputRef.current!.value = ''),
 		});
 	};
-	console.log(commentsQuery.data);
-	console.log(commentsQuery.isFetching);
+
 	return (
 		<div className='comments'>
 			<div>{commentsQuery.isLoading && <LoaderBar />}</div>
@@ -60,6 +59,7 @@ export const Commets = ({ postId }: Props) => {
 					height={40}
 					loading='lazy'
 				/>
+
 				<input type='text ' placeholder='Write a comment' required ref={inputRef} />
 				<button className='button-comment' onClick={handleComment}>
 					comment
@@ -68,3 +68,5 @@ export const Commets = ({ postId }: Props) => {
 		</div>
 	);
 };
+
+export default Commets;

@@ -45,7 +45,7 @@ export const getComments = async (postId: string): Promise<Comment[]> => {
 	});
 
 	controller.abort();
-	console.log({ data });
+
 	return data.comment ?? [];
 };
 
@@ -55,8 +55,13 @@ declare interface CommentLike {
 }
 
 export const createComment = async (comment: CommentLike): Promise<PostResponse> => {
-	console.log({ comment });
-	const { data } = await makeRequest.post<PostResponse>('/comments', comment);
+	const controller = new AbortController();
+
+	const { data } = await makeRequest.post<PostResponse>('/comments', comment, {
+		signal: controller.signal,
+	});
+
+	controller.abort();
 
 	return data;
 };

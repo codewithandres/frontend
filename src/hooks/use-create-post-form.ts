@@ -1,4 +1,4 @@
-import { useMemo, useState, type FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { usePostMutation } from './use-postMutation';
 import { useImagenLoad } from './use-image-load';
 import type { EmojiClickData } from 'emoji-picker-react';
@@ -17,14 +17,10 @@ export const useCreatePostForm = () => {
 		imageUpload.removeImage();
 	};
 
-	const handleEmoji = useMemo(
-		() => (event: EmojiClickData) => {
-			setDescription(current => `${current}${event.emoji}`);
-			setIsExpanded(true);
-			// setIsExpanded(false);
-		},
-		[setDescription]
-	);
+	const handleEmoji = (event: EmojiClickData) => {
+		setDescription(current => `${current}${event.emoji}`);
+		setIsExpanded(true);
+	};
 
 	const handleSubmit = async (event: FormEvent) => {
 		event.preventDefault();
@@ -37,7 +33,7 @@ export const useCreatePostForm = () => {
 			description,
 			image: imageUrl,
 		});
-		
+
 		resetForm();
 	};
 	return {
