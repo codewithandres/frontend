@@ -64,7 +64,7 @@ export const Post = ({ Post }: PostProps) => {
 					</button>
 				</div>
 
-				{commnetOpen && <Commets />}
+				{commnetOpen && <Commets postId={String(Post.id)} />}
 			</div>
 		</div>
 	);

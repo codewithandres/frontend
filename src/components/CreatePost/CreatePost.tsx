@@ -58,17 +58,6 @@ export const CreatePost = () => {
 					name='createPost'
 				/>
 
-				<EmojiPicker
-					open={isExpanded}
-					onEmojiClick={handleEmoji}
-					theme={darkMode ? Theme.DARK : Theme.LIGHT}
-					className='create-post__emoji-picker'
-					emojiStyle={EmojiStyle.FACEBOOK}
-					width={'100%'}
-					lazyLoadEmojis={true}
-					searchDisabled={true}
-				/>
-
 				{uploadProgres > 0 && <Progress progresWidt={uploadProgres} />}
 
 				{imagenPreview && (
@@ -113,6 +102,17 @@ export const CreatePost = () => {
 						post
 					</button>
 				</div>
+
+				<EmojiPicker
+					open={isExpanded}
+					onEmojiClick={handleEmoji}
+					theme={darkMode ? Theme.DARK : Theme.LIGHT}
+					className='create-post__emoji-picker'
+					emojiStyle={EmojiStyle.FACEBOOK}
+					width={'100%'}
+					lazyLoadEmojis={true}
+					searchDisabled={true}
+				/>
 			</form>
 		</div>
 	);
