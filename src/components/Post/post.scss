@@ -1,12 +1,12 @@
-@import '../../sass/mixin/dark-mode.scss';
+@use '../../sass/mixin/dark-mode.scss' as mixin;
 
 .post {
-	@include themify($themes) {
+	@include mixin.themify(mixin.$themes) {
 		--status: attr(data-comments-open);
 		box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
 		border-radius: 0.5rem;
-		background-color: themed('bg');
-		color: themed('textColor');
+		background-color: mixin.themed('bg');
+		color: mixin.themed('textColor');
 		animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 
 		height: max-content;
@@ -44,7 +44,7 @@
 						}
 						.date {
 							font-size: 0.8rem;
-							color: themed('textColorSoft');
+							color: mixin.themed('textColorSoft');
 						}
 					}
 				}
@@ -81,13 +81,13 @@
 					cursor: pointer;
 					padding: 0.2rem 0.5rem;
 					transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
-					color: themed('textColorSoft');
+					color: mixin.themed('textColorSoft');
 					border: none;
 					background-color: transparent;
 
 					&:hover {
-						background-color: themed('bgSoft');
-						color: themed('textColor');
+						background-color: mixin.themed('bgSoft');
+						color: mixin.themed('textColor');
 					}
 					&:active {
 						scale: 0.9;

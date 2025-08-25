@@ -1,10 +1,10 @@
-@import '../../../sass/mixin/dark-mode.scss';
+@use '../../../sass/mixin/dark-mode.scss' as mixin;
 
 .notification {
-	@include themify($themes) {
+	@include mixin.themify(mixin.$themes) {
 		width: 100%;
 		padding: 1rem;
-		background-color: themed('bgSoft');
+		background-color: mixin.themed('bgSoft');
 		border-radius: 1rem;
 		margin-top: 2rem;
 		box-shadow: hsla(0, 0%, 0%, 0.16) 0px 10px 36px 0px,
@@ -24,7 +24,7 @@
 					text-wrap: balance;
 					font-size: 1.2rem;
 					font-weight: 500;
-					color: themed('textColor');
+					color: mixin.themed('textColor');
 				}
 
 				.notification__header__button {
@@ -67,7 +67,7 @@
 					transition: background-color 300ms cubic-bezier(0.19, 1, 0.22, 1);
 
 					&:hover {
-						background-color: themed('bg');
+						background-color: mixin.themed('bg');
 					}
 
 					.notification__body__item--info {
@@ -95,12 +95,12 @@
 						}
 
 						.item-info__text {
-							color: themed('textColorSoft');
+							color: mixin.themed('textColorSoft');
 							font-size: smaller;
 							text-wrap: pretty;
 
 							.item-info__text--bold {
-								color: themed('textColor');
+								color: mixin.themed('textColor');
 								font-size: small;
 								font-weight: 500;
 							}
@@ -108,7 +108,7 @@
 
 						.item-info__commet {
 							width: 85%;
-							background-color: themed('bg');
+							background-color: mixin.themed('bg');
 							margin-left: 1rem;
 							padding: 0.5rem;
 							border-radius: 1rem;
@@ -120,7 +120,7 @@
 								overflow: clip;
 								white-space: nowrap;
 								text-overflow: ellipsis;
-								color: themed('textColorSoft');
+								color: mixin.themed('textColorSoft');
 								font-size: smaller;
 							}
 						}
@@ -141,7 +141,7 @@
 						}
 
 						p {
-							color: themed('textColorSoft');
+							color: mixin.themed('textColorSoft');
 							font-size: smaller;
 							text-wrap: nowrap;
 						}

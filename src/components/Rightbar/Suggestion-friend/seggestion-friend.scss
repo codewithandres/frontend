@@ -1,10 +1,10 @@
-@import '../../../sass/mixin/dark-mode.scss';
-@import '../../../sass/mixin/resposive-mode.scss';
+@use '../../../sass/mixin/dark-mode.scss' as mixin;
+@use '../../../sass/mixin/resposive-mode.scss' as responsive;
 
 .suggestion__friend {
-	@include themify($themes) {
+	@include mixin.themify(mixin.$themes) {
 		width: 100%;
-		background-color: themed('bgSoft');
+		background-color: mixin.themed('bgSoft');
 		margin-block-end: 1rem;
 		border-radius: 1rem;
 		padding: 1rem;
@@ -19,7 +19,7 @@
 			.find__title {
 				font-weight: 500;
 				font-size: 1.4rem;
-				color: themed('textColor');
+				color: mixin.themed('textColor');
 				margin-bottom: 0.5rem;
 			}
 
@@ -73,18 +73,18 @@
 					padding-inline: 1.2rem;
 					padding-block: 0.7rem;
 					font-family: inherit;
-					background-color: themed('bg');
+					background-color: mixin.themed('bg');
 					border: none;
 					border-radius: 2rem;
 					cursor: pointer;
 					transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
 					&:hover {
-						outline: 2px solid themed('border');
-						background-color: themed('bgSoft');
+						outline: 2px solid mixin.themed('border');
+						background-color: mixin.themed('bgSoft');
 
 						& .icon-add {
-							background-color: themed('bg');
+							background-color: mixin.themed('bg');
 						}
 					}
 
@@ -93,14 +93,14 @@
 					}
 
 					span {
-						color: themed('textColor');
+						color: mixin.themed('textColor');
 						text-wrap: nowrap;
 						font-weight: 400;
 					}
 
 					.icon-add {
-						background-color: themed('bgSoft');
-						color: themed('textColorSoft');
+						background-color: mixin.themed('bgSoft');
+						color: mixin.themed('textColorSoft');
 						border-radius: 50%;
 						padding: 0.4rem;
 					}
@@ -119,7 +119,7 @@
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
-					color: themed('textColor');
+					color: mixin.themed('textColor');
 					margin-bottom: 0.5rem;
 
 					h2 {
@@ -158,13 +158,13 @@
 							}
 
 							h4 {
-								color: themed('textColor');
+								color: mixin.themed('textColor');
 								font-weight: 500;
 								font-size: 1rem;
 							}
 
 							span {
-								color: themed('textColorSoft');
+								color: mixin.themed('textColorSoft');
 								font-weight: 300;
 								font-size: 0.9rem;
 							}
@@ -178,8 +178,8 @@
 							cursor: pointer;
 							display: grid;
 							place-items: center;
-							background-color: themed('bg');
-							color: themed('textColorSoft');
+							background-color: mixin.themed('bg');
+							color: mixin.themed('textColorSoft');
 						}
 					}
 				}

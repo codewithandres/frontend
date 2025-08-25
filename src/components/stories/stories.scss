@@ -1,4 +1,4 @@
-@import '../../sass/mixin/resposive-mode.scss';
+@use '../../sass/mixin/resposive-mode.scss' as responsive;
 
 .stories {
 	display: flex;
@@ -6,12 +6,12 @@
 	height: 220px;
 	margin-bottom: 1.5rem;
 
-	@include mobile {
+	@include responsive.mobile {
 		height: 50px;
 		justify-content: space-between;
 	}
 
-	@include tablet {
+	@include responsive.tablet {
 		height: 150px;
 		gap: 1.5rem;
 	}
@@ -22,7 +22,7 @@
 		overflow: hidden;
 		position: relative;
 
-		@include mobile {
+		@include responsive.mobile {
 			flex: none;
 			width: 50px;
 			height: 50px;
@@ -44,7 +44,7 @@
 			text-wrap: pretty;
 			font-size: 0.8rem;
 
-			@include mobile {
+			@include responsive.mobile {
 				display: none;
 			}
 		}
@@ -62,7 +62,7 @@
 			border-radius: 50%;
 			cursor: pointer;
 
-			@include mobile {
+			@include responsive.mobile {
 				width: 40px;
 				height: 40px;
 				inset: 0;

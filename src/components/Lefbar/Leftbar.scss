@@ -1,8 +1,8 @@
-@import '../../sass/mixin/dark-mode.scss';
-@import '../../sass/mixin/resposive-mode.scss';
+@use '../../sass/mixin/dark-mode.scss' as mixin;
+@use '../../sass/mixin/resposive-mode.scss' as responsive;
 
 .leftbar {
-	@include themify($themes) {
+	@include mixin.themify(mixin.$themes) {
 		flex: 2;
 		position: sticky;
 		top: 10vh;
@@ -10,10 +10,10 @@
 		overflow-y: auto;
 		scrollbar-width: none;
 		scrollbar-color: hsl(210, 17%, 93%) hsl(0, 0%, 100%);
-		background-color: themed('bg');
-		color: themed('textColor');
+		background-color: mixin.themed('bg');
+		color: mixin.themed('textColor');
 
-		@include mobile {
+		@include responsive.mobile {
 			display: none;
 		}
 
@@ -49,7 +49,7 @@
 							text-transform: capitalize;
 						}
 						span {
-							color: themed('textColorSoft');
+							color: mixin.themed('textColorSoft');
 							font-size: small;
 							font-weight: normal;
 						}

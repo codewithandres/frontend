@@ -1,10 +1,10 @@
-@import '../../sass/mixin/dark-mode.scss';
+@use '../../sass/mixin/dark-mode.scss' as mixin;
 
 .create-post {
-	@include themify($themes) {
+	@include mixin.themify(mixin.$themes) {
 		interpolate-size: allow-keywords;
 
-		background-color: themed('bg');
+		background-color: mixin.themed('bg');
 		border-radius: 0.5rem;
 		padding: 1.5rem;
 		margin-bottom: 2rem;
@@ -33,7 +33,7 @@
 
 			.create-post__username {
 				font-weight: 500;
-				color: themed('textColor');
+				color: mixin.themed('textColor');
 			}
 		}
 
@@ -45,8 +45,8 @@
 			.create-post__textarea {
 				border: none;
 				outline: none;
-				background-color: themed('bgSoft');
-				color: themed('textColor');
+				background-color: mixin.themed('bgSoft');
+				color: mixin.themed('textColor');
 				padding: 1rem;
 				border-radius: 0.5rem;
 				resize: vertical;
@@ -56,7 +56,7 @@
 				field-sizing: content;
 
 				&::placeholder {
-					color: themed('textColorSoft');
+					color: mixin.themed('textColorSoft');
 				}
 
 				&:focus {
@@ -113,14 +113,14 @@
 					align-items: center;
 					gap: 0.5rem;
 					padding: 0.5rem 1rem;
-					background-color: themed('bgSoft');
+					background-color: mixin.themed('bgSoft');
 					border-radius: 0.5rem;
 					cursor: pointer;
 					transition: background-color 0.2s;
-					color: themed('textColorSoft');
+					color: mixin.themed('textColorSoft');
 
 					&:hover {
-						background-color: themed('border');
+						background-color: mixin.themed('border');
 					}
 
 					span {
@@ -143,7 +143,7 @@
 					}
 
 					&:disabled {
-						background-color: themed('textColorSoft');
+						background-color: mixin.themed('textColorSoft');
 						cursor: not-allowed;
 						opacity: 0.6;
 					}

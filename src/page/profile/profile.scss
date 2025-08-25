@@ -1,9 +1,9 @@
-@import '../../sass/mixin/dark-mode.scss';
-@import '../../sass/mixin/resposive-mode.scss';
+@use "../../sass/mixin/dark-mode.scss" as mixin;
+@use "../../sass/mixin/resposive-mode.scss" as responsive;
 
 .profile {
-	@include themify($themes) {
-		background-color: themed('bgSoft');
+	@include mixin.themify(mixin.$themes) {
+		background-color: mixin.themed('bgSoft');
 		min-height: 100vh;
 		padding-inline: 0.5rem;
 		padding-block: 0.5rem;
@@ -33,7 +33,7 @@
 				margin: auto;
 				box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 0.4rem;
 
-				@include tablet {
+				@include responsive.tablet {
 					top: 330px;
 				}
 			}
@@ -43,7 +43,7 @@
 			// margin-top: 0.7rem;
 			width: 100%;
 
-			@include tablet {
+			@include responsive.tablet {
 				padding: 1.5rem;
 			}
 
@@ -54,8 +54,8 @@
 				box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
 					rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 				border-radius: 0.5rem;
-				background-color: themed('bg');
-				color: themed('textColor');
+				background-color: mixin.themed('bg');
+				color: mixin.themed('textColor');
 				padding: 2.5rem;
 
 				display: flex;
@@ -63,7 +63,7 @@
 				justify-content: center;
 				gap: 1rem;
 
-				@include mobile {
+				@include responsive.mobile {
 					padding-top: 5rem;
 					flex-direction: column;
 				}
@@ -75,7 +75,7 @@
 					align-items: center;
 					justify-content: center;
 
-					@include tablet {
+					@include responsive.tablet {
 						flex-direction: column;
 						flex-wrap: warp;
 					}
@@ -109,7 +109,7 @@
 							justify-content: center;
 							gap: 0.5rem;
 							padding: 0.5rem;
-							color: themed('textColorSoft');
+							color: mixin.themed('textColorSoft');
 
 							span {
 								font-size: small;
@@ -127,7 +127,7 @@
 					justify-content: center;
 					gap: 1rem;
 
-					@include tablet {
+					@include responsive.tablet {
 						flex-direction: column;
 						flex-wrap: warp;
 					}

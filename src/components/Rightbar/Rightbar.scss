@@ -1,8 +1,8 @@
-@import '../../sass/mixin/dark-mode.scss';
-@import '../../sass/mixin/resposive-mode.scss';
+@use '../../sass/mixin/dark-mode.scss' as mixin;
+@use '../../sass/mixin/resposive-mode.scss' as responsive;
 
 .righ-sidebar {
-	@include themify($themes) {
+	@include mixin.themify(mixin.$themes) {
 		flex: 3;
 		position: sticky;
 		top: 10vh;
@@ -10,13 +10,13 @@
 		overflow-y: auto;
 		scrollbar-width: thin;
 		scrollbar-color: hsl(210, 17%, 93%) hsl(0, 0%, 100%);
-		background-color: themed('bg');
+		background-color: mixin.themed('bg');
 
-		@include mobile {
+		@include responsive.mobile {
 			display: none;
 		}
 
-		@include tablet {
+		@include responsive.tablet {
 			display: none;
 		}
 
@@ -24,7 +24,7 @@
 			padding: 20px;
 
 			.item {
-				background-color: themed('bgSoft');
+				background-color: mixin.themed('bgSoft');
 				margin-bottom: 1rem;
 				padding: 1rem;
 				border-radius: 0.4rem;
@@ -32,7 +32,7 @@
 					rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 
 				span {
-					color: themed('textColorSoft');
+					color: mixin.themed('textColorSoft');
 				}
 
 				.user {
@@ -65,14 +65,14 @@
 						}
 
 						p {
-							color: themed('textColorSoft');
+							color: mixin.themed('textColorSoft');
 							font-size: small;
 
 							figcaption {
-								color: themed('textColorSoft');
+									color: mixin.themed('textColorSoft');
 								font-size: 0.8rem;
 								font-weight: 500;
-								color: themed('textColor');
+									color: mixin.themed('textColor');
 							}
 						}
 					}

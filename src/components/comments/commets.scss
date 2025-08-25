@@ -1,7 +1,7 @@
-@import '../../sass/mixin/dark-mode.scss';
+@use '../../sass/mixin/dark-mode.scss' as mixin;
 
 .comments {
-	@include themify($themes) {
+	@include mixin.themify(mixin.$themes) {
 		animation: scale-up-ver-top 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 
 		img {
@@ -21,10 +21,10 @@
 				flex: 4;
 				padding: 0.5rem;
 				width: 100%;
-				border: 1px solid themed('border');
+				border: 1px solid mixin.themed('border');
 				outline: 0;
 				background-color: transparent;
-				color: themed('textColorSoft');
+				color: mixin.themed('textColorSoft');
 				border-radius: 0.5rem;
 				transition: box-shadow 300ms ease-in;
 
@@ -55,7 +55,7 @@
 					font-weight: 500;
 				}
 				.comment__body__description {
-					color: themed('textColorSoft');
+					color: mixin.themed('textColorSoft');
 					text-wrap: pretty;
 				}
 			}
@@ -65,7 +65,7 @@
 				font-size: smaller;
 				text-wrap: nowrap;
 				align-self: flex-end;
-				color: themed('textColorSoft');
+				color: mixin.themed('textColorSoft');
 			}
 		}
 	}

@@ -1,16 +1,16 @@
-@import '../../sass/mixin/dark-mode.scss';
-@import '../../sass/mixin/resposive-mode.scss';
+@use "../../sass/mixin/dark-mode.scss" as mixin;
+@use "../../sass/mixin/resposive-mode.scss" as responsive;
 
 .home {
-	@include themify($themes) {
+	@include mixin.themify(mixin.$themes) {
 		min-height: 100vh;
 		padding: 20px 70px;
-		background-color: themed('bgSoft');
+		background-color: mixin.themed('bgSoft');
 
-		@include mobile {
+		@include responsive.mobile {
 			padding: 1rem;
 		}
-		@include tablet {
+		@include responsive.tablet {
 			padding: 1.5rem;
 		}
 	}
