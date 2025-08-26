@@ -1,3 +1,4 @@
+import type { Like, TypesLikes } from '../interface/ResponseTypeLikes';
 import type { Datum, Posts } from '../interface/ResponseTypePosts';
 import type { Comment, TypeCommets } from '../interface/ResposeTypeComment';
 import { makeRequest } from './api/axios';
@@ -28,10 +29,9 @@ export const createPost = async (post: PostLike): Promise<PostResponse> => {
 	return data;
 };
 
-// ccomments Actions
+//? ccomments Actions
 
 export const getComments = async (postId: string): Promise<Comment[]> => {
-	sleep(500);
 	if (!postId) throw new Error('Post ID is required');
 
 	const controller = new AbortController();
@@ -64,4 +64,36 @@ export const createComment = async (comment: CommentLike): Promise<PostResponse>
 	controller.abort();
 
 	return data;
+};
+
+// ? Likes Actions
+
+export const getLikes = async (postId: number): Promise<Like[]> => {
+	try {
+		if (!postId) throw new Error('Post ID is Required');
+
+		const params = new URLSearchParams();
+		params.append('postId', String(postId));
+
+		const { data } = await makeRequest.get<TypesLikes>('/likes', { params });
+
+		if (!data.success) throw new Error(data?.message);
+
+		return data.likes;
+	} catch (error) {
+		console.log('error getting Likes', error);
+		throw error;
+	}
+};
+
+export const toggleLike = async (postId: number): Promise<void> => {
+	try {
+		const params = new URLSearchParams();
+		params.append('postId', String(postId));
+
+		await makeRequest.post('/likes', {}, { params });
+	} catch (error) {
+		console.log('error with like action', error);
+		throw error;
+	}
 };
