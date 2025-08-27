@@ -20,17 +20,35 @@ const Commets = lazy(() => import('../comments/Commets'));
 import { Ring } from 'ldrs/react';
 import 'ldrs/react/Ring.css';
 
+import { useAuthContext } from '../../context/Auth.contex';
+import { useLikes } from '../../hooks/use-likes';
+
 interface PostProps {
 	Post: Datum;
 }
 
 export const Post = ({ Post }: PostProps) => {
-	//  Tempory
-	// const isLike = false;
+	const { user } = useAuthContext();
 
 	const [commnetOpen, setCommnetOpen] = useState<boolean>(false);
 
-	const { commentsQuery } = useComments({ postId: String(Post.id) });
+	const {
+		commentsQuery: { data: comments },
+	} = useComments({ postId: String(Post.id) });
+
+	const {
+		likeQuery: { data: Likes },
+		likeMutation,
+	} = useLikes({ postId: Post.id });
+
+	if (!user) return;
+
+	const isLike = Likes?.some(like => like.userId === user.id || false);
+	const likeCont = Likes?.length ?? 0;
+
+	const handleLike = () => {
+		likeMutation.mutate(Post.id);
+	};
 
 	return (
 		<div className={`post`}>
@@ -62,17 +80,18 @@ export const Post = ({ Post }: PostProps) => {
 				</div>
 
 				<div className='info'>
-					<button className='item'>
-						<Like /> 12 Likes
+					<button className='item' onClick={handleLike}>
+						<Like isCheket={isLike} />
+						{likeCont} Likes
 					</button>
 
 					<button className='item' onClick={() => setCommnetOpen(!commnetOpen)}>
 						<MessageCircleMore strokeWidth='1.25' size={20} />
-						{commentsQuery.data?.length} comments
+						{comments?.length} comments
 					</button>
 
 					<button className='item'>
-						<ExternalLink strokeWidth='1.25' size={20} /> 12 Likes
+						<ExternalLink strokeWidth='1.25' size={20} /> shared
 					</button>
 				</div>
 
