@@ -1,9 +1,13 @@
 import './Like.scss';
 
-const Like = () => {
+declare interface Props {
+	isCheket: boolean | undefined;
+}
+
+const Like = ({ isCheket }: Props) => {
 	return (
 		<label className='ui-bookmark'>
-			<input type='checkbox' />
+			<input type='checkbox' checked={isCheket} />
 			<div className='bookmark'>
 				<svg
 					viewBox='0 0 16 16'

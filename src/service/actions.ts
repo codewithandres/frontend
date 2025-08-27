@@ -30,10 +30,9 @@ export const createPost = async (post: PostLike): Promise<PostResponse> => {
 	return data;
 };
 
-// ccomments Actions
+//? ccomments Actions
 
 export const getComments = async (postId: string): Promise<Comment[]> => {
-	sleep(500);
 	if (!postId) throw new Error('Post ID is required');
 
 	const controller = new AbortController();
