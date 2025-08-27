@@ -1,5 +1,5 @@
-@use "../../sass/mixin/dark-mode.scss" as mixin;
-@use "../../sass/mixin/resposive-mode.scss" as responsive;
+@use '../../sass/mixin/dark-mode.scss' as mixin;
+@use '../../sass/mixin/resposive-mode.scss' as responsive;
 
 .profile {
 	@include mixin.themify(mixin.$themes) {
@@ -117,6 +117,24 @@
 							svg {
 								margin: auto;
 							}
+						}
+					}
+
+					.button-update,
+					.button-follow {
+						padding: 1rem 2rem;
+						border-radius: 2rem;
+						border: none;
+						cursor: pointer;
+						background-color: mixin.themed('bgSoft');
+						color: mixin.themed('textColor');
+						transition: 300ms ease-in;
+						outline: 2px solid transparent;
+
+						&:hover {
+							background-color: mixin.themed('bg');
+							color: mixin.themed('textColorsoft');
+							outline-color: mixin.themed('border');
 						}
 					}
 				}

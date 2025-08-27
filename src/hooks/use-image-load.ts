@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent } from 'react';
-import { useEdgeStore } from '../src/lib/edgestore';
+import { useEdgeStore } from '../lib/edgestore';
 
 export const useImagenLoad = () => {
 	const { edgestore } = useEdgeStore();

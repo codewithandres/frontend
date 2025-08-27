@@ -1,8 +1,9 @@
 import { use } from 'react';
+
 import './profile.scss';
 
-import photo_profile from '../../assets/phot_user.jpg';
-import phot_bacground from '../../assets/photo_bacground.jpg';
+import photo_placeholder from '../../assets/placeholder-user-stories.jpg';
+import photo_bacground from '../../assets/cover_picture.jpg';
 import logo_facebook from '../../assets/facebook.svg';
 import logo_instagran_light from '../../assets/instagram-light.svg';
 import logo_instagran_dark from '../../assets/instagram_dark.svg';
@@ -14,23 +15,36 @@ import logo_pinterest from '../../assets/pinterest.svg';
 import { DarkModeContex } from '../../context/contexts';
 import { EllipsisVertical, Globe, Mail, MapPinHouse } from 'lucide-react';
 
-import { Buttom } from '../../components/Buttom';
 import { Posts } from '../../components/posts/Posts';
+import { useParams } from 'react-router';
+import { useProfile } from '../../hooks/use-profile';
+import { useAuthContext } from '../../context/Auth.contex';
 
 export const Profile = () => {
+	const { id: currentUser } = useParams();
+
 	const { darkMode } = use(DarkModeContex);
 
+	const { user } = useAuthContext();
+
+	const {
+		profileQuery: { data },
+	} = useProfile({ userId: +currentUser! });
+
+	const isCurrentUser: boolean = currentUser === user?.id;
+	console.log(data);
 	return (
 		<div className='profile'>
 			<div className='images'>
 				<img
-					src={phot_bacground}
+					src={data?.prfile_cover ?? photo_bacground}
 					alt='photo bacground'
 					className='cover'
 					loading='lazy'
 				/>
+
 				<img
-					src={photo_profile}
+					src={data?.profilePicture ?? photo_placeholder}
 					alt='photo profile'
 					className='profile__picture'
 					loading='lazy'
@@ -91,7 +105,7 @@ export const Profile = () => {
 					</div>
 
 					<div className='center'>
-						<span className='user__name'>Jenny Perez</span>
+						<span className='user__name'>{data?.name}</span>
 						<div className='info'>
 							<div className='item'>
 								<MapPinHouse />
@@ -103,7 +117,12 @@ export const Profile = () => {
 								<span>www.jenny.com</span>
 							</div>
 						</div>
-						<Buttom>follow</Buttom>
+
+						{isCurrentUser ? (
+							<button className='button-follow'>follow</button>
+						) : (
+							<button className='button-update'> Update profile</button>
+						)}
 					</div>
 
 					<div className='right'>
