@@ -2,10 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getPosts } from '../service/actions';
 
-export const usePosts = () => {
+declare interface Options {
+	userId?: number;
+}
+
+export const usePosts = ({ userId }: Options) => {
 	const postsQuery = useQuery({
-		queryKey: ['posts'],
-		queryFn: () => getPosts(),
+		queryKey: ['posts', { userId }],
+		queryFn: () => getPosts(userId),
 		retry: false,
 		staleTime: 1000 * 60 * 60,
 	});

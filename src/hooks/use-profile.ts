@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import { getProfile } from '../service/actions';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { getFollows, getProfile } from '../service/actions';
 
 declare interface Options {
 	userId: number;
@@ -12,5 +12,11 @@ export const useProfile = ({ userId }: Options) => {
 		staleTime: 1000 * 60 * 60,
 	});
 
-	return { profileQuery };
+	const followsQuery = useSuspenseQuery({
+		queryKey: ['follows', { userId }],
+		queryFn: () => getFollows(userId),
+		staleTime: 1000 * 60 * 60,
+	});
+
+	return { profileQuery, followsQuery };
 };

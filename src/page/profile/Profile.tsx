@@ -1,137 +1,148 @@
-import { use } from 'react';
-
 import './profile.scss';
 
-import photo_placeholder from '../../assets/placeholder-user-stories.jpg';
-import photo_bacground from '../../assets/cover_picture.jpg';
-import logo_facebook from '../../assets/facebook.svg';
-import logo_instagran_light from '../../assets/instagram-light.svg';
-import logo_instagran_dark from '../../assets/instagram_dark.svg';
-import logo_x_light from '../../assets/x-ligth.svg';
-import logo_x_dark from '../../assets/x_dark.svg';
-import logo_linkedin from '../../assets/linkedin.svg';
-import logo_pinterest from '../../assets/pinterest.svg';
+import { useState } from 'react';
 
-import { DarkModeContex } from '../../context/contexts';
-import { EllipsisVertical, Globe, Mail, MapPinHouse } from 'lucide-react';
+import photo_placeholder from '../../assets/placeholder-user-stories.jpg';
+import photo_background from '../../assets/cover_picture.jpg';
+import { UserPlus, UserRoundPen } from 'lucide-react';
+import NumberFlow, { continuous } from '@number-flow/react';
 
 import { Posts } from '../../components/posts/Posts';
-import { useParams } from 'react-router';
+import { Navigate, useParams } from 'react-router';
 import { useProfile } from '../../hooks/use-profile';
 import { useAuthContext } from '../../context/Auth.contex';
+import { formatNumber } from '../../lib/formatNumber';
+import { useFollowMutation } from '../../hooks/use-followMutation';
+import Modal from '../../components/modal/Modal';
+import { flushSync } from 'react-dom';
+import { FormUpdateProfile } from '../../components/FormUpdate/FormUpdateProfile';
 
 export const Profile = () => {
-	const { id: currentUser } = useParams();
+	const [showModal, setShowModal] = useState<boolean>(false);
 
-	const { darkMode } = use(DarkModeContex);
+	const { id: currentUser } = useParams();
 
 	const { user } = useAuthContext();
 
 	const {
 		profileQuery: { data },
+		followsQuery: { data: follows },
 	} = useProfile({ userId: +currentUser! });
 
-	const isCurrentUser: boolean = currentUser === user?.id;
-	console.log(data);
+	const { followMutation } = useFollowMutation();
+
+	if (!currentUser && user?.id) {
+		return <Navigate to='/' replace />;
+	}
+
+	const isCurrentUser: boolean = +currentUser! === user?.id;
+
+	const onFollower = () => {
+		if (!user?.id || !currentUser) return;
+
+		followMutation.mutate({ followerId: user?.id, followingId: +currentUser });
+	};
+
+	const handleOpenModal = () =>
+		document.startViewTransition(() => {
+			flushSync(() => setShowModal(true));
+		});
+
+	const handleCloseModal = () =>
+		document.startViewTransition(() => {
+			flushSync(() => setShowModal(false));
+		});
+
 	return (
 		<div className='profile'>
-			<div className='images'>
-				<img
-					src={data?.prfile_cover ?? photo_bacground}
-					alt='photo bacground'
-					className='cover'
-					loading='lazy'
-				/>
-
-				<img
-					src={data?.profilePicture ?? photo_placeholder}
-					alt='photo profile'
-					className='profile__picture'
-					loading='lazy'
-				/>
-			</div>
-			<section className='profile__container'>
-				<div className='user__info'>
-					<div className='left'>
-						<a href='https://facebook.com'>
-							<img
-								src={logo_facebook}
-								alt='logo facebook'
-								loading='lazy'
-								width={20}
-								height={20}
-							/>
-						</a>
-
-						<a href='https://facebook.com'>
-							<img
-								src={darkMode ? logo_instagran_dark : logo_instagran_light}
-								alt='logo facebook'
-								loading='lazy'
-								width={20}
-								height={20}
-							/>
-						</a>
-
-						<a href='https://facebook.com'>
-							<img
-								src={darkMode ? logo_x_dark : logo_x_light}
-								alt='logo facebook'
-								loading='lazy'
-								width={20}
-								height={20}
-							/>
-						</a>
-
-						<a href='https://facebook.com'>
-							<img
-								src={logo_linkedin}
-								alt='logo facebook'
-								loading='lazy'
-								width={20}
-								height={20}
-							/>
-						</a>
-
-						<a href='https://facebook.com'>
-							<img
-								src={logo_pinterest}
-								alt='logo facebook'
-								loading='lazy'
-								width={20}
-								height={20}
-							/>
-						</a>
-					</div>
-
-					<div className='center'>
-						<span className='user__name'>{data?.name}</span>
-						<div className='info'>
-							<div className='item'>
-								<MapPinHouse />
-								<span>Colombia</span>
-							</div>
-
-							<div className='item'>
-								<Globe />
-								<span>www.jenny.com</span>
-							</div>
-						</div>
-
-						{isCurrentUser ? (
-							<button className='button-follow'>follow</button>
-						) : (
-							<button className='button-update'> Update profile</button>
-						)}
-					</div>
-
-					<div className='right'>
-						<Mail />
-						<EllipsisVertical />
-					</div>
-				</div>
-				<Posts />
+			<section className='profile-cover'>
+				<picture>
+					<img
+						src={data?.prfile_cover ?? photo_background}
+						alt={data?.username}
+						loading='lazy'
+					/>
+				</picture>
 			</section>
+
+			<section className='profile-info'>
+				<picture className='profile-info-avatar'>
+					<img
+						src={data?.profilePicture ?? photo_placeholder}
+						alt={data?.name}
+						loading='lazy'
+						// width={200}
+					/>
+				</picture>
+
+				<section className=' profile-info-conten '>
+					<h3 className='profile-info-name'>{data?.name}</h3>
+					<p className='profile-info-bio'>
+						{data?.bio ?? 'Lead product Designer at Android'}
+					</p>
+					<p className='profile-info-país'>
+						<img src='https://flagsapi.com/CO/flat/64.png' />
+						Santader, Santender Colombia
+					</p>
+
+					<section className='followers'>
+						<p>
+							<span>
+								<NumberFlow
+									plugins={[continuous]}
+									value={+formatNumber(follows?.follower.length ?? 0)}
+								/>
+							</span>
+							followers
+						</p>
+						<p>
+							<span>
+								<NumberFlow
+									plugins={[continuous]}
+									value={+formatNumber(follows?.following.length ?? 0)}
+								/>
+							</span>
+							followed
+						</p>
+					</section>
+
+					<section className=' profile-info-action '>
+						{!isCurrentUser && (
+							<button className='follow-action' onClick={onFollower}>
+								<span>
+									<UserPlus /> Follow
+								</span>
+								{/* <span>
+									<UserRoundCheck /> following
+								</span> */}
+							</button>
+						)}
+
+						{isCurrentUser && (
+							<button
+								onClick={handleOpenModal}
+								className='profile-action-edit'
+								style={{
+									viewTransitionName: showModal ? 'none' : 'edit-button-to-modal',
+									pointerEvents: showModal ? 'none' : 'auto',
+								}}
+							>
+								<span>
+									<UserRoundPen /> Edit profile
+								</span>
+							</button>
+						)}
+					</section>
+				</section>
+			</section>
+
+			{/* Modal */}
+
+			<Modal show={showModal} onClose={handleCloseModal}>
+				<FormUpdateProfile  />
+			</Modal>
+
+			<Posts />
 		</div>
 	);
 };

@@ -3,13 +3,21 @@ import type { ProfileUser, ProfileType } from '../interface/ResponseTypeProfile'
 import type { Comment, TypeCommets } from '../interface/ResposeTypeComment';
 import { makeRequest } from './api/axios';
 import type { Like, TypesLikes } from '../interface/ResponseTypeLikes';
+import type { TypeFollow } from '../interface/ResponsrTypeFollow';
 
 export const sleep = (ms: number): Promise<void> => {
 	return new Promise(resolve => setTimeout(resolve, ms));
 };
 
-export const getPosts = async (): Promise<Datum[]> => {
-	const { data } = await makeRequest.get<Posts>('/posts');
+export const getPosts = async (userId?: number): Promise<Datum[]> => {
+	const params: URLSearchParams = new URLSearchParams();
+	if (userId) params.append('userId', String(userId));
+
+	if (!userId) {
+		const { data } = await makeRequest.get<Posts>('/posts');
+		return data.data || [];
+	}
+	const { data } = await makeRequest.get<Posts>('/posts', { params });
 	return data.data || [];
 };
 
@@ -110,5 +118,41 @@ export const getProfile = async (userId: number): Promise<ProfileUser | undefine
 		return data.user;
 	} catch (error) {
 		console.log('error en al peticion ', error);
+	}
+};
+
+// Actions follows
+
+export const getFollows = async (userId: number): Promise<TypeFollow | undefined> => {
+	try {
+		if (!userId) throw new Error('parameter in required');
+
+		const params = new URLSearchParams();
+		params.append('userId', String(userId));
+
+		const { data: follows } = await makeRequest.get<TypeFollow>(`/follows`, { params });
+
+		return follows ?? [];
+	} catch (error) {
+		console.log('error en la peticion', error);
+	}
+};
+
+export const newFollow = async ({
+	followerId,
+	followingId,
+}: {
+	followerId: number;
+	followingId: number;
+}) => {
+	try {
+		console.log(followerId, followingId);
+		if (!followerId && !followingId) throw new Error('parameter in Require');
+		const { data } = await makeRequest.post('/follows', { followerId, followingId });
+
+		return data;
+	} catch (error) {
+		console.log('Error en la peticion', error);
+		throw error;
 	}
 };

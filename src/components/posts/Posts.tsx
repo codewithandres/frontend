@@ -1,3 +1,4 @@
+import { useParams } from 'react-router';
 import { usePosts } from '../../hooks/use-posts';
 import { CreatePost } from '../CreatePost/CreatePost';
 
@@ -7,8 +8,10 @@ import { PostSkeleton } from '../Post/PostSkeleton';
 import './posts.scss';
 
 export const Posts = () => {
-	const { postsQuery } = usePosts();
-	
+	const { id } = useParams();
+
+	const { postsQuery } = usePosts({ userId: +id! });
+
 	return (
 		<div className='posts'>
 			<CreatePost />
