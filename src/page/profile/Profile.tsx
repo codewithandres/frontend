@@ -53,6 +53,8 @@ export const Profile = () => {
 			flushSync(() => setShowModal(false));
 		});
 
+	if (!data) return <Navigate to={'/'} />;
+
 	return (
 		<div className='profile'>
 			<section className='profile-cover'>
@@ -139,7 +141,15 @@ export const Profile = () => {
 			{/* Modal */}
 
 			<Modal show={showModal} onClose={handleCloseModal}>
-				<FormUpdateProfile  />
+				<FormUpdateProfile
+					username={data.username}
+					name={data.name}
+					email={data.email}
+					address={data.address}
+					profilePhoto={data.profilePicture}
+					coverPhoto={data.prfile_cover}
+					biography={data.bio}
+				/>
 			</Modal>
 
 			<Posts />

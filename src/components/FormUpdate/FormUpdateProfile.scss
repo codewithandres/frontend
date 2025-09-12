@@ -47,6 +47,17 @@
 						border-color: hsla(214, 100%, 50%, 0.774);
 					}
 
+					&:has(.has-error) {
+						box-shadow: rgba(214, 3, 3, 0.3) 0px 0px 0px 3px;
+						border-color: hsla(0, 100%, 50%, 0.774);
+					}
+
+					&:has(.has-image) {
+						background-color: red;
+						box-shadow: rgba(52, 214, 3, 0.3) 0px 0px 0px 3px;
+						border-color: hsla(106, 100%, 50%, 0.774);
+					}
+
 					label {
 						position: absolute;
 						top: 50%;

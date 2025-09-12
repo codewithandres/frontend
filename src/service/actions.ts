@@ -115,9 +115,41 @@ export const getProfile = async (userId: number): Promise<ProfileUser | undefine
 
 		const { data } = await makeRequest.get<ProfileType>(`/user/find/${userId}`);
 
+		if (!data.success) throw new Error(data.message);
+
 		return data.user;
 	} catch (error) {
 		console.log('error en al peticion ', error);
+		throw error;
+	}
+};
+
+declare interface LikeProfile {
+	username: string;
+	name: string;
+	email: string;
+	address: string;
+	profilePhoto: string | null;
+	coverPhoto: string | null;
+	biography: string;
+}
+
+type ResponseUpdateAction = Omit<ProfileType, 'user'>;
+
+export const updateProfileAction = async (
+	updateprofile: LikeProfile
+): Promise<ResponseUpdateAction | undefined> => {
+	try {
+		const { data } = await makeRequest.put<ResponseUpdateAction>(
+			'/user/update',
+			updateprofile
+		);
+
+		if (!data.success) throw new Error(data.message);
+
+		return data;
+	} catch (error) {
+		console.log('Error en la peticion ', error);
 	}
 };
 
@@ -132,9 +164,10 @@ export const getFollows = async (userId: number): Promise<TypeFollow | undefined
 
 		const { data: follows } = await makeRequest.get<TypeFollow>(`/follows`, { params });
 
-		return follows ?? [];
+		return follows ?? { following: [], follower: [] };
 	} catch (error) {
 		console.log('error en la peticion', error);
+		return { following: [], follower: [] };
 	}
 };
 

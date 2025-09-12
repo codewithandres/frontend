@@ -1,6 +1,7 @@
 export interface ProfileType {
 	success: boolean;
 	user: ProfileUser;
+	message?: string;
 }
 
 export interface ProfileUser {
@@ -9,8 +10,9 @@ export interface ProfileUser {
 	email: string;
 	profilePicture: null;
 	prfile_cover: null;
-	bio: null;
+	bio: string;
 	createdAt: Date;
 	updatedAt: null;
 	name: string;
+	address: string;
 }

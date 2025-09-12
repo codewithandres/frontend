@@ -32,3 +32,14 @@ declare interface TypeFormSingIn {
 	username: string;
 	password: string;
 }
+
+declare interface TypeProfile {
+	id: number;
+	username: string;
+	name: string;
+	email: string;
+	address: string;
+	profilePhoto: string | null | FileList;
+	coverPhoto: string | null | FileList;
+	biography: string;
+}

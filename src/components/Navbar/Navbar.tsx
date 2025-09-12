@@ -3,13 +3,13 @@ import { use } from 'react';
 import './Navbar.scss';
 
 import avatarPlaceholder from '../../assets/Avatar-Profile-Vector-PNG-Pic.png';
-
-import { Link } from 'react-router';
+import logo from '../../assets/logo.svg';
 
 import { DarkModeContex } from '../../context/contexts';
 
 import { Bell, ChevronDown, LogOut, Search, SunMoon, User } from 'lucide-react';
 import { useAuthContext } from '../../context/Auth.contex';
+import { Link } from 'react-router';
 
 export const Navbar = () => {
 	const { toggle } = use(DarkModeContex);
@@ -24,8 +24,9 @@ export const Navbar = () => {
 	return (
 		<nav className='navbar'>
 			<div className='left'>
-				<Link to={'/home'}>
-					<span> codewithsocial </span>
+				<Link to={'/'}>
+					<img src={logo} alt='logo' width={35} />
+					<span> PhotoFrenzy </span>
 				</Link>
 			</div>
 

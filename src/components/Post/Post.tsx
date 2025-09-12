@@ -1,5 +1,4 @@
 import './post.scss';
-import { Link } from 'react-router';
 
 import { Ellipsis, ExternalLink, MessageCircleMore } from 'lucide-react';
 
@@ -22,6 +21,7 @@ import 'ldrs/react/Ring.css';
 
 import { useAuthContext } from '../../context/Auth.contex';
 import { useLikes } from '../../hooks/use-likes';
+import { Link } from 'react-router';
 
 interface PostProps {
 	Post: Datum;

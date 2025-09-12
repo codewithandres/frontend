@@ -7,7 +7,7 @@ declare interface Props {
 const Like = ({ isCheket }: Props) => {
 	return (
 		<label className='ui-bookmark'>
-			<input type='checkbox' checked={isCheket} />
+			<input type='checkbox' checked={!!isCheket} readOnly />
 			<div className='bookmark'>
 				<svg
 					viewBox='0 0 16 16'

@@ -1,4 +1,3 @@
-// import { SingIn } from './page/login/Sing-in';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { SingUp } from './page/register/Sing-up';
 import { SingIn } from './page/login/Sing-in';
@@ -11,6 +10,8 @@ import { AuthLayout } from './Layout/Auth-layout';
 import { Toaster } from 'sonner';
 import { use } from 'react';
 import { DarkModeContex } from './context/contexts';
+
+
 
 function App() {
 	const { darkMode } = use(DarkModeContex);
