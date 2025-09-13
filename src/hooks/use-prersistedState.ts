@@ -1,5 +1,5 @@
 // ?  Hook personalizado para persistir estado en localStorage
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { getItem, setItem } from '../utils/localStorege';
 
@@ -12,14 +12,19 @@ export const usePrersistedState = <T>(key: string, initialValues: T) => {
 			const item = getItem(key);
 			return (item as T) ?? initialValues;
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			return initialValues;
 		}
 	});
 
+	const prevValueRef = useRef(value);
+
 	//   Guarda en localStorage cada vez que el valor o la key cambian
 	useEffect(() => {
-		setItem(key, value);
+		if (prevValueRef.current !== value) {
+			setItem(key, value);
+			prevValueRef.current = value;
+		}
 	}, [key, value]);
 
 	//  Retorna el valor y la función para actualizarlo
