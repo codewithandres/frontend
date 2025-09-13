@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getLikes, toggleLike } from '../service/actions';
 
-declare interface Options {
+interface Options {
 	postId: number;
 }
 

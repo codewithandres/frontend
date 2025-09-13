@@ -21,6 +21,8 @@ export const useImagenLoad = () => {
 
 	const removeImage = (): void => {
 		setImagen(null);
+
+		if (imagenPreview) return URL.revokeObjectURL(imagenPreview);
 		setImagenPreview('');
 		setUploadProgres(0);
 	};
@@ -35,7 +37,7 @@ export const useImagenLoad = () => {
 			});
 			return url;
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			setUploadProgres(0);
 			return null;
 		}

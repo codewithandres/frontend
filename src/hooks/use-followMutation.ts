@@ -14,7 +14,7 @@ export const useFollowMutation = () => {
 		},
 
 		onError: () => {
-			toast.error('Error creating post');
+			toast.error('Error following user');
 		},
 	});
 
