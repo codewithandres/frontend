@@ -5,26 +5,28 @@ declare interface Options {
 	userId: number;
 }
 
+const STALE_TIME = 1000 * 60 * 60;
+
 export const useProfile = ({ userId }: Options) => {
 	const queryClient = useQueryClient();
 
 	const profileQuery = useQuery({
 		queryKey: ['profile', { userId }],
 		queryFn: () => getProfile(userId),
-		staleTime: 1000 * 60 * 60,
+		staleTime: STALE_TIME,
 		enabled: !!userId && userId > 0,
 	});
 
 	const followsQuery = useQuery({
 		queryKey: ['follows', { userId }],
 		queryFn: () => getFollows(userId),
-		staleTime: 1000 * 60 * 60,
+		staleTime: STALE_TIME,
 		enabled: !!userId && userId > 0,
 	});
 
-	// const isFollowing = followsQuery.data?.follows?.some(
-	// 	(follow: { followingId: number }) => follow.followingId === userId
-	// );
+	const isFollowing = followsQuery.data?.follower?.some(
+		(follow: { followingId: number }) => follow.followingId === userId
+	);
 
 	const profileUpdateMutation = useMutation({
 		mutationFn: updateProfileAction,
@@ -48,5 +50,5 @@ export const useProfile = ({ userId }: Options) => {
 		onSettled: () => queryClient.invalidateQueries({ queryKey: ['profile', { userId }] }),
 	});
 
-	return { profileQuery, followsQuery, profileUpdateMutation };
+	return { profileQuery, followsQuery, profileUpdateMutation, isFollowing };
 };

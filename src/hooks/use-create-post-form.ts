@@ -27,14 +27,17 @@ export const useCreatePostForm = () => {
 
 		if (!description.trim()) return;
 
-		const imageUrl = await imageUpload.uploadImage();
+		try {
+			const imageUrl = await imageUpload.uploadImage();
 
-		postMutation.mutate({
-			description,
-			image: imageUrl,
-		});
-
-		resetForm();
+			postMutation.mutate({ description, image: imageUrl });
+			resetForm();
+		} catch (error) {
+			console.log('failed to upload image: ', error);
+			// Still allow post creation without image
+			postMutation.mutate({ description, image: null });
+			resetForm();
+		}
 	};
 	return {
 		// Properties
