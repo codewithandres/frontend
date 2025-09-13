@@ -5,10 +5,6 @@ import { makeRequest } from './api/axios';
 import type { Like, TypesLikes } from '../interface/ResponseTypeLikes';
 import type { TypeFollow } from '../interface/ResponsrTypeFollow';
 
-export const sleep = (ms: number): Promise<void> => {
-	return new Promise(resolve => setTimeout(resolve, ms));
-};
-
 export const getPosts = async (userId?: number): Promise<Datum[]> => {
 	const params: URLSearchParams = new URLSearchParams();
 	if (userId) params.append('userId', String(userId));
@@ -87,10 +83,9 @@ export const getLikes = async (postId: number): Promise<Like[]> => {
 		const { data } = await makeRequest.get<TypesLikes>('/likes', { params });
 
 		if (!data.success) throw new Error(data?.message);
-
 		return data.likes;
 	} catch (error) {
-		console.log('error getting Likes', error);
+		console.error('error getting Likes', error);
 		throw error;
 	}
 };
@@ -102,7 +97,7 @@ export const toggleLike = async (postId: number): Promise<void> => {
 
 		await makeRequest.post('/likes', {}, { params });
 	} catch (error) {
-		console.log('error with like action', error);
+		console.error('error with like action', error);
 		throw error;
 	}
 };
@@ -119,7 +114,7 @@ export const getProfile = async (userId: number): Promise<ProfileUser | undefine
 
 		return data.user;
 	} catch (error) {
-		console.log('error en al peticion ', error);
+		console.error('error en al peticion ', error);
 		throw error;
 	}
 };
@@ -149,7 +144,7 @@ export const updateProfileAction = async (
 
 		return data;
 	} catch (error) {
-		console.log('Error en la peticion ', error);
+		console.error('Error en la peticion ', error);
 	}
 };
 
@@ -166,7 +161,7 @@ export const getFollows = async (userId: number): Promise<TypeFollow | undefined
 
 		return follows ?? { following: [], follower: [] };
 	} catch (error) {
-		console.log('error en la peticion', error);
+		console.error('error en la peticion', error);
 		return { following: [], follower: [] };
 	}
 };
@@ -179,13 +174,12 @@ export const newFollow = async ({
 	followingId: number;
 }) => {
 	try {
-		console.log(followerId, followingId);
 		if (!followerId && !followingId) throw new Error('parameter in Require');
 		const { data } = await makeRequest.post('/follows', { followerId, followingId });
 
 		return data;
 	} catch (error) {
-		console.log('Error en la peticion', error);
+		console.error('Error en la peticion', error);
 		throw error;
 	}
 };

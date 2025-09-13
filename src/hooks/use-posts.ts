@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getPosts } from '../service/actions';
 
-declare interface Options {
+interface Options {
 	userId?: number;
 }
 
@@ -10,8 +10,9 @@ export const usePosts = ({ userId }: Options) => {
 	const postsQuery = useQuery({
 		queryKey: ['posts', { userId }],
 		queryFn: () => getPosts(userId),
-		retry: false,
-		staleTime: 1000 * 60 * 60,
+		staleTime: 2 * 60 * 1000,
+		refetchInterval: 5 * 60 * 1000, // Actualiza cada 5 min en background
+		refetchIntervalInBackground: true,
 	});
 
 	return { postsQuery };
