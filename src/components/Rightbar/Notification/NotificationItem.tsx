@@ -26,14 +26,14 @@ export const NotificationItem = ({
 						height={50}
 					/>
 					<p className='item-info__text'>
-						<span className='item-info__text--bold'>@{username}</span> follow yuo
+						<span className='item-info__text--bold'>@{username}</span> follow you
 					</p>
 				</div>
 
 				<div className='read'>
 					{isRead && <span className='dot__read'></span>}
 
-					<p>2 Hors ago</p>
+					<p>2 Hours ago</p>
 				</div>
 			</div>
 		);
@@ -59,7 +59,7 @@ export const NotificationItem = ({
 				<div className='read'>
 					{isRead && <span className='dot__read'></span>}
 
-					<p>2 Hors ago</p>
+					<p>2 Hours ago</p>
 				</div>
 			</div>
 		);
@@ -75,25 +75,26 @@ export const NotificationItem = ({
 							alt='imagen user'
 							className='item-info__img'
 							loading='lazy'
-							// width={50}
-							// height={50}
 						/>
 						<p className='item-info__text'>
-							<span className='item-info__text--bold'>@{username}</span> commented on your post 
+							<span className='item-info__text--bold'>@{username}</span> commented on your
+							post
 						</p>
 					</figure>
 
 					<section className='item-info__commet'>
-						<p>love the background on this.! would love to learm how</p>
+						<p>love the background on this.! would love to learn how</p>
 					</section>
 				</div>
 
 				<div className='read'>
 					{isRead && <span className='dot__read'></span>}
 
-					<p>2 Hors ago</p>
+					<p>2 Hours ago</p>
 				</div>
 			</div>
 		);
 	}
+
+	return null;
 };

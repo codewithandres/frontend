@@ -27,13 +27,9 @@ function App() {
 						<Route path='profile/:id' element={<Profile />} />
 					</Route>
 
-					<Route element={<AuthLayout />} />
-					<Route path='sing-in'>
-						<Route index element={<SingIn />} />
-					</Route>
-
-					<Route path='sing-up'>
-						<Route index element={<SingUp />} />
+					<Route element={<AuthLayout />}>
+						<Route path='sing-in' element={<SingIn />} />
+						<Route path='sing-up' element={<SingUp />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

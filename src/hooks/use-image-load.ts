@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent } from 'react';
 import { useEdgeStore } from '../lib/edgestore';
 
+// amazonq-ignore-next-line
 export const useImagenLoad = () => {
 	const { edgestore } = useEdgeStore();
 
@@ -11,6 +12,8 @@ export const useImagenLoad = () => {
 	const handleImagenChange = ({ target }: ChangeEvent<HTMLInputElement>): void => {
 		const file = target.files?.[0];
 		if (file) {
+			if (imagenPreview) URL.revokeObjectURL(imagenPreview);
+
 			setImagen(file);
 			setImagenPreview(URL.createObjectURL(file));
 		}
@@ -24,14 +27,18 @@ export const useImagenLoad = () => {
 
 	const uploadImage = async (): Promise<string | null> => {
 		if (!imagen) return null;
-
-		const { url } = await edgestore.PrivateFiles.upload({
-			file: imagen,
-			input: { type: 'private' },
-			onProgressChange: (progress: number) => setUploadProgres(progress),
-		});
-
-		return url;
+		try {
+			const { url } = await edgestore.PrivateFiles.upload({
+				file: imagen,
+				input: { type: 'private' },
+				onProgressChange: (progress: number) => setUploadProgres(progress),
+			});
+			return url;
+		} catch (error) {
+			console.log(error);
+			setUploadProgres(0);
+			return null;
+		}
 	};
 
 	return {

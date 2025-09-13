@@ -10,7 +10,9 @@ import './posts.scss';
 export const Posts = () => {
 	const { id } = useParams();
 
-	const { postsQuery } = usePosts({ userId: +id! });
+	const userId = id ? +id : 0;
+
+	const { postsQuery } = usePosts({ userId });
 
 	return (
 		<div className='posts'>

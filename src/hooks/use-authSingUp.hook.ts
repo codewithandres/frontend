@@ -22,7 +22,7 @@ export const useAuthSingUpHook = () => {
 		try {
 			const formData = { name, username, password, email };
 			const { data } = await axios.post(
-				`http://localhost:8080/api/auth/singup`,
+				`${import.meta.env.VITE_API_URL || 'https://localhost:8080'}/api/auth/singup`,
 				formData
 			);
 
