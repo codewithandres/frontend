@@ -1,10 +1,17 @@
-import { Navigate } from 'react-router';
+import type { JSX } from 'react';
 import { useAuthContext } from '../context/Auth.contex';
+import { Navigate } from 'react-router';
 
-export const ProtectedRoute = ({ children }: PropsChildren) => {
-	const { isAuthenticated } = useAuthContext();
+declare interface Props {
+	element: JSX.Element;
+}
 
-	if (!isAuthenticated) return <Navigate to={'/sing-in'} />;
+export const ProtectedRoute = ({ element }: Props) => {
+	const { status } = useAuthContext();
 
-	return <>{children}</>;
+	if (status === 'authenticated') {
+		return element;
+	}
+
+	return <Navigate to='/sing-in' replace />;
 };

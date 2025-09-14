@@ -20,7 +20,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export const FormUpdateProfile = (dataProfile: TypeProfile) => {
-	const { profileUpdateMutaton } = useProfile({ userId: dataProfile.id });
+	const { profileUpdateMutation } = useProfile({ userId: dataProfile.id });
 
 	const profileImage = useImagenLoad();
 	const coverImge = useImagenLoad();
@@ -41,7 +41,7 @@ export const FormUpdateProfile = (dataProfile: TypeProfile) => {
 	});
 
 	const onSubmit = async (data: FormData) => {
-		profileUpdateMutaton.mutate(data, {
+		profileUpdateMutation.mutate(data, {
 			onSuccess: (data: unknown) => {
 				console.log(data);
 			},

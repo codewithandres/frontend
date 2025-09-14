@@ -10,8 +10,7 @@ import { AuthLayout } from './Layout/Auth-layout';
 import { Toaster } from 'sonner';
 import { use } from 'react';
 import { DarkModeContex } from './context/contexts';
-
-
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
 	const { darkMode } = use(DarkModeContex);
@@ -23,8 +22,11 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route element={<RootLayout />}>
-						<Route index element={<Home />} />
-						<Route path='profile/:id' element={<Profile />} />
+						<Route index element={<ProtectedRoute element={<Home />} />} />
+						<Route
+							path='profile/:id'
+							element={<ProtectedRoute element={<Profile />} />}
+						/>
 					</Route>
 
 					<Route element={<AuthLayout />}>

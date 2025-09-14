@@ -3,16 +3,24 @@
 import { Link, useNavigate } from 'react-router';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 
-import './singIn.scss';
-
-import { Buttom } from '../../components/Buttom';
-
 import { useAuthContext } from '../../context/Auth.contex';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { authSingIn } from '../../scheme/auth.scheme';
+import clsx from 'clsx';
+
+import './singIn.scss';
+import { useEffect } from 'react';
 
 export const SingIn = () => {
-	const { loginWithEmailandPassword } = useAuthContext();
+	const navigate = useNavigate();
+
+	const { loginWithEmailAndPassword, status } = useAuthContext();
+
+	useEffect(() => {
+		if (status === 'authenticated') {
+			navigate('/');
+		}
+	}, [navigate, status]);
 
 	const { register, handleSubmit, formState } = useForm<TypeFormSingIn>({
 		resolver: zodResolver(authSingIn),
@@ -20,12 +28,12 @@ export const SingIn = () => {
 
 	const { username, password } = formState.errors;
 
-	const navigate = useNavigate();
+	const onLogin: SubmitHandler<TypeFormSingIn> = ({ username, password }) => {
+		loginWithEmailAndPassword(username, password);
 
-	const onLogin: SubmitHandler<TypeFormSingIn> = async ({ username, password }) => {
-		loginWithEmailandPassword(username, password);
-
-		navigate('/');
+		if (status === 'authenticated') {
+			navigate('/');
+		}
 	};
 
 	return (
@@ -44,13 +52,23 @@ export const SingIn = () => {
 				<div className='right'>
 					<h2>Sing In</h2>
 					<form onSubmit={handleSubmit(onLogin)}>
-						<input type='text' placeholder='Username' {...register('username')} />
+						<input
+							className={clsx({ 'has-error': username?.message })}
+							type='text'
+							placeholder='Username'
+							{...register('username')}
+						/>
 						{username && <span className='error'>{username?.message}</span>}
 
-						<input type='password' placeholder='Password' {...register('password')} />
-						{password && <span className='error'>{username?.message}</span>}
+						<input
+							className={clsx({ 'has-error': password?.message })}
+							type='password'
+							placeholder='Password'
+							{...register('password')}
+						/>
+						{password && <span className='error'>{password?.message}</span>}
 
-						<Buttom>Sing in</Buttom>
+						<button className='button-singIn'>Sing in</button>
 					</form>
 				</div>
 			</div>

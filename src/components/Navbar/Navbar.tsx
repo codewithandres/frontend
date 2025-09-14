@@ -14,7 +14,7 @@ import { Link } from 'react-router';
 export const Navbar = () => {
 	const { toggle } = use(DarkModeContex);
 
-	const { user } = useAuthContext();
+	const { user, logout } = useAuthContext();
 
 	const handelDropDaw = () => {
 		const dropDaw = document.querySelector('.user-dropdaw');
@@ -61,7 +61,7 @@ export const Navbar = () => {
 							<SunMoon /> <span> Dark Mode </span>
 						</li>
 
-						<li className='user-dropdaw__item'>
+						<li className='user-dropdaw__item' onClick={logout}>
 							<LogOut /> <span> log out </span>
 						</li>
 					</ul>

@@ -1,16 +1,41 @@
 $bg-primary: oklch(98.2% 0.003 277.7);
 $bg-primary-alpha: oklch(99.4% 0.0015 266.8);
 
+.fade-in-fwd {
+	animation: fade-in-fwd 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+@keyframes fade-in-fwd {
+	0% {
+		transform: translateZ(-80px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateZ(0);
+		opacity: 1;
+	}
+}
+
 .sing-up {
 	height: 100dvh;
 	background-color: $bg-primary;
+	interpolate-size: allow-keywords;
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	overflow: clip;
+	transition: height 0.5s ease;
+
+	&:has(.has-error) {
+		height: max-content;
+	}
 
 	.card {
 		display: flex;
+		align-items: center;
+		justify-content: center;
+
 		background-color: $bg-primary-alpha;
 		flex-direction: row-reverse;
 		border-radius: 0.5rem;
@@ -76,7 +101,7 @@ $bg-primary-alpha: oklch(99.4% 0.0015 266.8);
 				display: flex;
 				justify-content: center;
 				flex-direction: column;
-				gap: 1.5rem;
+				gap: 1rem;
 
 				input {
 					width: 100%;
@@ -89,6 +114,7 @@ $bg-primary-alpha: oklch(99.4% 0.0015 266.8);
 					border-radius: 0.4rem;
 					transition: 300ms ease;
 					outline: none;
+					transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 
 					box-shadow: oklch(0% 0 0 / 0.05) 0px 6px 24px 0px,
 						oklch(0% 0 0 / 0.08) 0px 0px 0px 1px;
@@ -104,7 +130,7 @@ $bg-primary-alpha: oklch(99.4% 0.0015 266.8);
 						box-shadow: oklch(60.315% 0.21744 257.629 / 0.3) 0px 0px 0px 3px;
 					}
 
-					&:is(.input-invalid) {
+					&:is(.has-error) {
 						box-shadow: oklch(62.793% 0.25768 29.223 / 0.05) 0px 6px 24px 0px,
 							oklch(62.793% 0.25768 29.223 / 0.08) 0px 0px 0px 2px;
 					}
@@ -114,8 +140,33 @@ $bg-primary-alpha: oklch(99.4% 0.0015 266.8);
 						cursor: not-allowed;
 					}
 				}
+
+				.button-singIn {
+					padding: 1rem 2rem;
+					border: none;
+					background-color: hsl(212, 100%, 50%);
+					color: white;
+					width: max-content;
+					border-radius: 10rem;
+					font-size: 1rem;
+					cursor: pointer;
+					outline: 3px solid transparent;
+					transition: scale 200ms cubic-bezier(0.19, 1, 0.22, 1),
+						outline 300ms cubic-bezier(0.19, 1, 0.22, 1),
+						background-color 260ms cubic-bezier(0.19, 1, 0.22, 1);
+
+					&:active {
+						scale: 0.97;
+					}
+
+					&:hover {
+						outline-color: hsl(213, 51%, 75%);
+						background-color: hsl(212, 86%, 37%);
+					}
+				}
+
 				.error {
-					color: oklch(62.793% 0.25768 29.223);
+					color: oklch(65.759% 0.12724 21.086);
 					font-size: smaller;
 					font-weight: 500;
 				}

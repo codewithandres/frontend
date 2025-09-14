@@ -2,17 +2,19 @@ export const setItem = (key: string, value: unknown): void => {
 	try {
 		localStorage.setItem(key, JSON.stringify(value));
 	} catch (error) {
-		console.log(error);
-		return;
+		console.error(error);
 	}
 };
 
 export const getItem = <T>(key: string): T | null => {
 	try {
 		const item = localStorage.getItem(key);
-		return item ? (JSON.parse(item) as T) : null;
+
+		if (item === null || item === undefined) return null;
+
+		return JSON.parse(item) as T;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 		return null;
 	}
 };

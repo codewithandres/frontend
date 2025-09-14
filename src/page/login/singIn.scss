@@ -73,7 +73,7 @@ $bg-primary-alpha: oklch(99.4% 0.0015 266.8);
 				display: flex;
 				justify-content: center;
 				flex-direction: column;
-				gap: 1.5rem;
+				gap: 1rem;
 
 				input {
 					width: 100%;
@@ -90,6 +90,10 @@ $bg-primary-alpha: oklch(99.4% 0.0015 266.8);
 					box-shadow: oklch(0% 0 0 / 0.05) 0px 6px 24px 0px,
 						oklch(0% 0 0 / 0.08) 0px 0px 0px 1px;
 
+					&.has-error {
+						box-shadow: oklch(62.892% 0.25667 29.099 / 0.3) 0px 0px 0px 3px;
+					}
+
 					&::placeholder {
 						font-size: 0.9rem;
 						text-transform: lowercase;
@@ -99,6 +103,34 @@ $bg-primary-alpha: oklch(99.4% 0.0015 266.8);
 
 					&:focus {
 						box-shadow: oklch(60.315% 0.21744 257.629 / 0.3) 0px 0px 0px 3px;
+					}
+				}
+
+				.error {
+					color: hsl(0, 79%, 72%);
+					font-size: small;
+					text-wrap: pretty;
+					margin-inline-start: 0.5rem;
+				}
+
+				.button-singIn {
+					width: max-content;
+					padding: 1rem 2rem;
+					border: none;
+					background-color: hsl(216, 100%, 50%);
+					border-radius: 10rem;
+					font-size: 1rem;
+					color: azure;
+					cursor: pointer;
+					transition: scale 200ms cubic-bezier(0.19, 1, 0.22, 1),
+						outline 300ms cubic-bezier(0.19, 1, 0.22, 1);
+					outline: 4px solid transparent;
+
+					&:active {
+						scale: 0.9;
+					}
+					&:hover {
+						outline-color: rgb(147, 178, 214);
 					}
 				}
 			}

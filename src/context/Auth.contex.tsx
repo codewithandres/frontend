@@ -1,75 +1,72 @@
-import { createContext, useContext, type PropsWithChildren } from 'react';
+import React, { createContext, useContext, type PropsWithChildren } from 'react';
 import { usePrersistedState } from '../hooks/use-prersistedState';
 import axios from 'axios';
 import type { ResponseSingin } from '../interface/responseTypeSingin';
 
-const AuthStatus = {
-	authenticated: 'authenticated',
-	unauthenticated: 'unauthenticated',
-} as const;
+type AuthStatus = 'authenticated' | 'unauthenticated';
 
-declare type AuthStatus = (typeof AuthStatus)[keyof typeof AuthStatus];
-
-interface AuthState {
-	status: AuthStatus;
-	token?: string;
-	user?: User;
-	isAuthenticated: boolean;
-	// Metods
-	loginWithEmailandPassword: (username: string, password: string) => void;
-}
-
-declare interface User {
+interface User {
 	id: number;
 	username: string;
 	name: string;
 	profilePicture: string;
 }
 
-export const AuthContex = createContext({} as AuthState);
+interface AuthState {
+	status: AuthStatus;
+	user: User | null;
+	isAuthenticated: boolean;
+	loginWithEmailAndPassword: (username: string, password: string) => Promise<void>;
+	logout: () => void;
+}
 
-export const useAuthContext = () => useContext(AuthContex);
+export const AuthContext: React.Context<AuthState> = createContext({} as AuthState);
+
+export const useAuthContext = (): AuthState => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-	const [user, setUser] = usePrersistedState<User | undefined>('user', undefined);
+	const [user, setUser] = usePrersistedState<User | null>('user', null);
 
-	const loginWithEmailandPassword = async (username: string, password: string) => {
+	const loginWithEmailAndPassword = async (
+		username: string,
+		password: string
+	): Promise<void> => {
 		try {
-			console.log({ username, password });
-			const formData = { username, password };
-
 			const { data } = await axios.post<ResponseSingin>(
-				`http://localhost:8080/api/auth/singin`,
-				formData,
+				'http://localhost:8080/api/auth/singin',
+				{ username, password },
 				{ withCredentials: true }
 			);
 
-			return setUser({
+			setUser({
 				id: data.other.id,
 				name: data.other.name,
 				username: data.other.username,
 				profilePicture: data.other.profilePicture!,
 			});
 		} catch (error) {
-			console.log(error);
+			console.error('Login failed:', error);
 		}
 	};
 
+	const logout = () => {
+		setUser(null);
+		localStorage.removeItem('user');
+	};
+
+	const status: AuthStatus = user ? 'authenticated' : 'unauthenticated';
+
 	return (
-		<AuthContex.Provider
+		<AuthContext.Provider
 			value={{
-				// Propertis
-				status: AuthStatus.unauthenticated,
-				user: user,
-
-				// Getter
-				isAuthenticated: AuthStatus.authenticated === AuthStatus.authenticated,
-
-				// Metods
-				loginWithEmailandPassword,
+				status,
+				user,
+				isAuthenticated: !!user,
+				loginWithEmailAndPassword,
+				logout,
 			}}
 		>
 			{children}
-		</AuthContex.Provider>
+		</AuthContext.Provider>
 	);
 };

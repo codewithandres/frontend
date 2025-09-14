@@ -1,14 +1,25 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Link } from 'react-router';
-import { Buttom } from '../../components/Buttom';
+import { Link, useNavigate } from 'react-router';
 
 import './sing-up.scss';
 import { authSingUp } from '../../scheme/auth.scheme';
 import { useAuthSingUpHook } from '../../hooks/use-authSingUp.hook';
+import { useAuthContext } from '../../context/Auth.contex';
+import clsx from 'clsx';
+import { useEffect } from 'react';
 
 export const SingUp = () => {
+	const navigate = useNavigate();
+	const { status } = useAuthContext();
+
+	useEffect(() => {
+		if (status === 'authenticated') {
+			navigate('/');
+		}
+	}, [status, navigate]);
+
 	const {
 		register,
 		handleSubmit,
@@ -20,7 +31,7 @@ export const SingUp = () => {
 	const { onSubmit } = useAuthSingUpHook();
 
 	return (
-		<div className='sing-up'>
+		<div className={clsx('sing-up', { 'has-animated': errors })}>
 			<div className='card'>
 				<div className='left'>
 					<h2>Social Networks</h2>
@@ -41,10 +52,10 @@ export const SingUp = () => {
 							placeholder='Username'
 							{...register('username')}
 							disabled={isLoading}
-							className={errors.username ? 'input-invalid' : ''}
+							className={clsx({ 'has-error': errors.username?.message })}
 						/>
 						{errors.username?.message && (
-							<span className='error'>{errors.username.message}</span>
+							<span className='error fade-in-fwd'>{errors.username.message}</span>
 						)}
 
 						<input
@@ -52,19 +63,21 @@ export const SingUp = () => {
 							placeholder='Joe Done'
 							disabled={isLoading}
 							{...register('name')}
-							className={errors.username ? 'input-invalid' : ''}
+							className={clsx({ 'has-error': errors.name?.message })}
 						/>
-						{errors.name?.message && <span className='error'>{errors.name.message}</span>}
+						{errors.name?.message && (
+							<span className='error fade-in-fwd'>{errors.name.message}</span>
+						)}
 
 						<input
 							type='email'
 							placeholder='correo@demo.com'
 							disabled={isLoading}
 							{...register('email')}
-							className={errors.username ? 'input-invalid' : ''}
+							className={clsx({ 'has-error': errors.email?.message })}
 						/>
 						{errors.email?.message && (
-							<span className='error'>{errors.email.message}</span>
+							<span className='error fade-in-fwd'>{errors.email.message}</span>
 						)}
 
 						<input
@@ -72,10 +85,10 @@ export const SingUp = () => {
 							placeholder='Password'
 							{...register('password')}
 							disabled={isLoading}
-							className={errors.username ? 'input-invalid' : ''}
+							className={clsx({ 'has-error': errors.password?.message })}
 						/>
 						{errors.password?.message && (
-							<span className='error'>{errors.password.message}</span>
+							<span className='error fade-in-fwd'>{errors.password.message}</span>
 						)}
 
 						<input
@@ -83,13 +96,15 @@ export const SingUp = () => {
 							placeholder='Confirm Password'
 							{...register('confirmPassword')}
 							disabled={isLoading}
-							className={errors.username ? 'input-invalid' : ''}
+							className={clsx({ 'has-error': errors.confirmPassword?.message })}
 						/>
 						{errors.confirmPassword?.message && (
-							<span className='error'>{errors.confirmPassword.message}</span>
+							<span className='error fade-in-fwd'>{errors.confirmPassword.message}</span>
 						)}
 
-						<Buttom> {isLoading ? 'creating account...' : 'Sing up'} </Buttom>
+						<button className='button-singIn'>
+							{isLoading ? 'creating account...' : 'Sing up'}
+						</button>
 					</form>
 					{/* <div>{JSON.stringify(watch(), null, 2)}</div> */}
 				</div>

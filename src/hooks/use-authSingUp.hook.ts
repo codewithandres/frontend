@@ -35,7 +35,7 @@ export const useAuthSingUpHook = () => {
 			toast.success('account created successfully', {
 				position: 'top-center',
 			});
-		} catch (error) {
+		} catch (error) { 
 			console.log(error);
 
 			if (axios.isAxiosError(error)) {
