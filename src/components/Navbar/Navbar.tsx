@@ -9,9 +9,13 @@ import { DarkModeContex } from '../../context/contexts';
 
 import { Bell, ChevronDown, LogOut, Search, SunMoon, User } from 'lucide-react';
 import { useAuthContext } from '../../context/Auth.contex';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+
+import { DropdownMenuCustom } from '../Dropdawn/DropdawCusrom';
 
 export const Navbar = () => {
+	const navigate = useNavigate();
+
 	const { toggle } = use(DarkModeContex);
 
 	const { user, logout } = useAuthContext();
@@ -21,10 +25,41 @@ export const Navbar = () => {
 		dropDaw?.classList.toggle('active');
 	};
 
+	const navbarItems = [
+		{
+			icon: <User />,
+			label: 'Profile',
+			shortcut: '⌘E',
+
+			actions: () => navigate(`/profile/${user?.id}`, { viewTransition: true }),
+		},
+		{
+			icon: <Bell />,
+			label: 'Notifications',
+
+			actions: () => console.log('Copiar'),
+		},
+
+		{
+			icon: <SunMoon />,
+			label: 'Dark Mode ',
+			actions: toggle,
+		},
+		{ type: 'separator' as const },
+		{
+			icon: <LogOut />,
+			label: 'log out',
+			destructive: true,
+			shortcut: '⌘⌫',
+
+			actions: logout,
+		},
+	];
+
 	return (
 		<nav className='navbar'>
 			<div className='left'>
-				<Link to={'/'}>
+				<Link to={'/'} viewTransition>
 					<img src={logo} alt='logo' width={35} />
 					<span> PhotoFrenzy </span>
 				</Link>
@@ -44,27 +79,12 @@ export const Navbar = () => {
 					/>
 					<span>{user?.username}</span>
 					<span> </span>
-					<ChevronDown />
-				</div>
 
-				<div className='user-dropdaw'>
-					<ul className='user-dropdaw__menu'>
-						<li className='user-dropdaw__item'>
-							<User /> <span> Profile </span>
-						</li>
-
-						<li className='user-dropdaw__item'>
-							<Bell /> <span> Notifications </span>
-						</li>
-
-						<li className='user-dropdaw__item' onClick={toggle}>
-							<SunMoon /> <span> Dark Mode </span>
-						</li>
-
-						<li className='user-dropdaw__item' onClick={logout}>
-							<LogOut /> <span> log out </span>
-						</li>
-					</ul>
+					<DropdownMenuCustom
+						items={navbarItems}
+						trigger={<ChevronDown />}
+						menuClassName='custom-menu'
+					/>
 				</div>
 			</div>
 		</nav>
