@@ -18,7 +18,7 @@ export const SingIn = () => {
 
 	useEffect(() => {
 		if (status === 'authenticated') {
-			navigate('/');
+			navigate('/', { viewTransition: true });
 		}
 	}, [navigate, status]);
 
@@ -32,7 +32,7 @@ export const SingIn = () => {
 		loginWithEmailAndPassword(username, password);
 
 		if (status === 'authenticated') {
-			navigate('/');
+			navigate('/', { viewTransition: true });
 		}
 	};
 
