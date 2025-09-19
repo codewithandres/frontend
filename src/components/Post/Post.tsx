@@ -1,6 +1,6 @@
 import './post.scss';
 
-import { Ellipsis, ExternalLink, MessageCircleMore } from 'lucide-react';
+import { Bookmark, Copy, Edit, MessageCircleMore, Trash } from 'lucide-react';
 
 import Like from '../Like/Like';
 
@@ -23,9 +23,37 @@ import { useAuthContext } from '../../context/Auth.contex';
 import { useLikes } from '../../hooks/use-likes';
 import { Link } from 'react-router';
 
+import NumberFlow, { continuous } from '@number-flow/react';
+import { DropdownMenuCustom } from '../Dropdawn/DropdawCusrom';
+
 interface PostProps {
 	Post: Datum;
 }
+
+const menuItems = [
+	{
+		icon: <Edit />,
+		label: 'Editar',
+		shortcut: '⌘E',
+
+		actions: () => console.log('Editar '),
+	},
+	{
+		icon: <Copy />,
+		label: 'Copiar enlace',
+
+		actions: () => console.log('Copiar'),
+	},
+	{ type: 'separator' as const },
+	{
+		icon: <Trash />,
+		label: 'Eliminar',
+		destructive: true,
+		shortcut: '⌘⌫',
+
+		actions: () => console.log('Eliminar'),
+	},
+];
 
 export const Post = ({ Post }: PostProps) => {
 	const { user } = useAuthContext();
@@ -45,6 +73,8 @@ export const Post = ({ Post }: PostProps) => {
 
 	const isLike = Likes?.some(like => like.userId === user.id || false);
 	const likeCont = Likes?.length ?? 0;
+
+	const postCreatedByTheCurrentUser: boolean = Post.userId === user.id;
 
 	const handleLike = () => {
 		likeMutation.mutate(Post.id);
@@ -71,7 +101,17 @@ export const Post = ({ Post }: PostProps) => {
 							<span className='date'> {formateRelattiveTime(Post.createdAt)} </span>
 						</div>
 					</div>
-					<Ellipsis />
+
+					{/* actions Post */}
+					<div>
+						{postCreatedByTheCurrentUser ? (
+							<DropdownMenuCustom items={menuItems} side='bottom' align='end' />
+						) : (
+							<button>
+								<Bookmark />
+							</button>
+						)}
+					</div>
 				</div>
 
 				<div className='content'>
@@ -82,16 +122,12 @@ export const Post = ({ Post }: PostProps) => {
 				<div className='info'>
 					<button className='item' onClick={handleLike}>
 						<Like isCheket={isLike} />
-						{likeCont} Likes
+						<NumberFlow plugins={[continuous]} value={likeCont} /> Likes
 					</button>
 
 					<button className='item' onClick={() => setCommnetOpen(!commnetOpen)}>
 						<MessageCircleMore strokeWidth='1.25' size={20} />
-						{comments?.length} comments
-					</button>
-
-					<button className='item'>
-						<ExternalLink strokeWidth='1.25' size={20} /> shared
+						<NumberFlow plugins={[continuous]} value={comments?.length ?? 0} /> comments
 					</button>
 				</div>
 
