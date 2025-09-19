@@ -7,15 +7,12 @@ export const useFollowMutation = () => {
 
 	const followMutation = useMutation({
 		mutationFn: newFollow,
-		retry: false,
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['follows'] });
 			toast.success('Followed successfully');
 		},
 
-		onError: () => {
-			toast.error('Error creating post');
-		},
+		onError: () => toast.error('Error creating post'),
 	});
 
 	return {
